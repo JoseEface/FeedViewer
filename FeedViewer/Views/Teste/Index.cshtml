@@ -1,0 +1,65 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+@model FeedViewer.Models.usuario
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Lalalall</title>
+        <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.10.0.min.js"></script>
+        <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/additional-methods.min.js"></script>
+
+        <script src="http://ajax.aspnetcdn.com/ajax/mvc/4.0/jquery.validate.unobtrusive.min.js"></script>
+
+    </head>
+    
+    <body>
+
+
+    <h2>Index</h2>
+
+        @DateTime.Now
+@using (Html.BeginForm(null,null,FormMethod.Post,new {id="banana" }))
+{
+    @Html.EditorForModel()
+    @Html.DisplayForModel()
+    @Html.ValidationSummary()
+    <input id="laranja" type="button" value="Enviar" />        
+}
+        
+        <script>
+
+            $("#laranja").click(function (e) {
+                e.preventDefault();
+                if ($("#banana").valid()) {
+                    alert("É válido " + $("#banana").attr("action") + " " + $("#banana").attr("method"));
+                    $.ajax({
+                        type: $("#banana").attr("method"),
+                        url: $("#banana").attr("action"),
+                        data: $("#banana").serialize(),
+                        dataType: "json",
+                        success: function (dados) {
+                            console.log(dados);
+                            alert("Exbido");
+                        },
+                        error: function (req, erro, msg) {
+                            console.log("erro na requisicao");
+                            console.log(req);
+                            console.log(erro);
+                            console.log(msg);
+                        }
+                    });
+                }
+                else {
+                    alert("aqui");
+                }
+            });
+
+        </script>
+
+
+    </body>
+
+</html>

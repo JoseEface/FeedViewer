@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FeedViewer", "FeedViewer\FeedViewer.csproj", "{5EBBE7E4-ACFB-4F38-9917-49390516D69F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{B85F25DC-E447-48FB-B178-0086F95E5634}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\packages.config = .nuget\packages.config
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Erros", "Erros", "{E24FF696-648B-4950-B8D7-A3834542FBCC}"
+	ProjectSection(SolutionItems) = preProject
+		403.html = 403.html
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5EBBE7E4-ACFB-4F38-9917-49390516D69F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5EBBE7E4-ACFB-4F38-9917-49390516D69F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5EBBE7E4-ACFB-4F38-9917-49390516D69F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5EBBE7E4-ACFB-4F38-9917-49390516D69F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

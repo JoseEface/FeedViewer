@@ -1,0 +1,659 @@
+﻿@{
+    ViewBag.Title = "Meus RSS";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@section AreaHead
+{
+    <link rel="stylesheet" href="@Url.Content("~/Content/themes/gentelella/css/datatables/tools/css/dataTables.tableTools.css")" />
+    <style>
+        .erroMsg {
+            color: red;
+            width: 100%;
+            clear: both;
+        }
+    </style>
+
+}
+
+
+@section AreaConteudo 
+{
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>RSS Feed <small>dados do rss</small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+
+
+                    <form id="rssform" class="form-horizontal form-label-left">
+                        @Html.AntiForgeryToken()
+                        <!--ATENCAO: Input hidden não funciona com reset ! Corrigindo com css... -->
+                        <input type="text" name="id" id="id" value="0" style="display: none;" />
+                        <input type="text" name="donoid" id="donoid" value="0" style="display: none;" />
+
+                        
+                                <b>Não encontrou o RSS que desejava ?</b>
+                                <p> Cadastre seu RSS Feed para que você e outras pessoas possam utlizar no FeedViewer:</p>
+                                <br />
+                        
+                        <div class="form-group" id="fgnomefeed">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nomefeed">
+                                Nome descrição <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">                                
+                                <input type="text" id="nomefeed" name="nomefeed" required="required" class="form-control col-md-7 col-xs-12" maxlength="256">
+                                <div id="vnomefeed" class="erroMsg"></div>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group" id="fgcaminhorss">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="caminhorss">
+                                URL do RSS <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="url" id="caminhorss" name="caminhorss" required="required" class="form-control col-md-7 col-xs-12">
+                                <div id="vcaminhorss" class="erroMsg"></div>
+                            </div>
+                        </div>
+
+                        <div class="ln_solid"></div>
+                        <div class="form-group">
+                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                <button type="reset" id="btncancelar" class="btn btn-primary">Cancelar</button>
+                                <button type="button" id="btnremover" class="btn btn-warning">Remover</button>
+                                <button type="button" id="btngravar" class="btn btn-success">Gravar</button>
+                            </div>
+                        </div>
+
+                    </form>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Busca <small>buscar feed</small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+
+                    <h4>Buscar por:</h4>
+                    <div class="ln_solid"></div>
+
+                    <!-- data-parsley-validate -->
+                    <form id="formbuscarss" class="form-horizontal form-label-left">
+
+                        <div class="form-group" id="fgrssbusca">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="rssbusca">
+                                Nome RSS <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" id="rssbusca" name="rssbusca" class="form-control col-md-7 col-xs-12" maxlength="256">
+                                <div id="vrssbusca" class="erroMsg"></div>
+                            </div>
+                        </div>
+
+                       <div class="form-group" id="fgrssbuscatipo">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="rssbuscatipo">
+                                RSS que
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select id="rssbuscatipo" name="rssbuscatipo" class="form-control">                                    
+                                    <option value="0">Não tenha adicionado</option>
+                                    <option value="1">Está cadastrado (todos)</option>
+                                    <option value="2">Sou dono que não tenha adicionado</option>
+                                    <option value="3">Sou dono e posso editar</option>
+                                    <option value="4">Já tenho adicionado</option>
+                                </select>
+                                <div id="vrssbuscatipo" class="erroMsg"></div>
+                            </div>
+                        </div>
+
+
+                        <div class="ln_solid"></div>
+                        <div class="form-group">
+                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                <button type="reset" id="btncancelarbusca" class="btn btn-primary">Cancelar</button>
+                                <button type="button" id="btnbuscar" class="btn btn-success">Buscar</button>                                
+                            </div>
+                        </div>
+                        <div class="ln_solid"></div>
+                    </form>
+
+                    <h4>Resultados da busca:</h4>
+                    <div class="ln_solid"></div>
+
+                    <table id="listaRSS" class="table table-striped responsive-utilities jambo_table">
+                        <thead>
+                            <tr>
+                                <th>RSS</th>
+                                <th>Nome</th>
+                                <th>URL</th>                                
+                                <th>Eu uso ?</th>
+                                <th>Qtd. usando</th>
+                                <th>Operações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="idcorpotabela">
+                            <!--
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>  
+                                    <button class="btn btn-success btn-xs" title="Você pode adicionar a sua lista RSS pessoal"><span class="glyphicon glyphicon-plus"></span></button> 
+                                    <button class="btn btn-danger btn-xs" title="Remova o RSS Feed da sua lista pessoal"><span class="glyphicon glyphicon-minus"></span></button> 
+                                    <button class="btn btn-warning btn-xs" title="Você pode editar os detalhes desse RSS, você é o dono e só você ou ninguém está usando"><span class="glyphicon glyphicon-pencil"></span></button> 
+                                    <button class="btn btn-primary btn-xs" title="Ver o RSS"><span class="glyphicon glyphicon-search"></span></button> 
+                                    
+                                </td>
+                            </tr>
+                                -->
+                        </tbody>
+                    </table>
+                    <br /><br />
+                    <button type="button" id="btnqueronovo" class="btn btn-warning" title="Ajude o FeedViewer, cadastre novos RSS Feeds.">Não encontrei o que queria !</button>
+                    <br />
+                    <br />
+                    <div class="ln_solid"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+
+    <div class="row" id="mostraDetalhe">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel" id="DetalheRSS">
+                <div class="x_title">
+                    <h2>RSS Feed <small>detalhes do rss</small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <h3>Detalhes de: <span id="feednome"> </span></h3>
+                    <p>Mostrando as três últimas movimentações, para ver todas clique no botão ver todas as movimentações do RSS: </p>
+                    <button class="btn btn-success pull-right" id="feedTodas" title="Exibe todas as movimentações do RSS">Todas as movimentações</button>
+                    <input type="hidden" name="descId" id="descId" value="0" />
+                    <div id="movimentacoesRSS" style="width: 100%; height: 250px; clear: both; border: 1px solid #e6e9ed; overflow-y: scroll;">
+
+                    </div>
+                    <br />
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+}
+
+@section AreaScript
+{
+    <script src="@Url.Content("~/Content/themes/gentelella/js/datatables/js/jquery.dataTables.js")"></script>
+    <script src="@Url.Content("~/Content/themes/gentelella/js/datatables/tools/js/dataTables.tableTools.js")"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.14.0/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.14.0/additional-methods.min.js"></script>
+    <script type="text/javascript">
+
+        var tabela;
+        var validabusca;
+        var validacadastro;        
+
+        function desenhaTabela() {
+
+            tabela = $("#listaRSS").dataTable({
+                "sPaginationType": "full_numbers",
+                "bDestroy": true,
+                "bAutoWidth": false,
+                "language":
+                    {
+                        "sEmptyTable": "Nenhum registro encontrado",
+                        "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+                        "sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
+                        "sInfoFiltered": "(Filtrados de _MAX_ registros)",
+                        "sInfoPostFix": "",
+                        "sInfoThousands": ".",
+                        "sLengthMenu": "Mostrando _MENU_ resultados por página",
+                        "sLoadingRecords": "Carregando...",
+                        "sProcessing": "Processando...",
+                        "sZeroRecords": "Nenhum registro encontrado",
+                        "sSearch": "Pesquisar",
+                        "oPaginate": {
+                            "sNext": "Próximo",
+                            "sPrevious": "Anterior",
+                            "sFirst": "Primeiro",
+                            "sLast": "Último"
+                        },
+                        "oAria": {
+                            "sSortAscending": ": Ordenar colunas de forma ascendente",
+                            "sSortDescending": ": Ordenar colunas de forma descendente"
+                        }
+                    },
+                "tableTools": {
+                    "sSwfPath": ""
+                }
+            });
+
+
+        }
+
+        function limpaVisualizacao() {
+            $("#descId").val(0);
+            $("#movimentacoesRSS").html();
+        }
+
+        function VisualizaRSS(id,nome,qtd) {
+            //alert("Estou vendo o RSS Feed " + id + nome);
+            
+            $("#movimentacoesRSS").html("<img src=\""+"http://www.arabianbusiness.com/skins/ab.main/gfx/loading_spinner.gif"+"\" style=\"margin-left: 40%;margin-top: 2%;\"></img>");
+            $("#descId").val(0);
+            $("html, body").animate({ scrollTop: $("#mostraDetalhe").offset().top }, 1000);
+            $.ajax({
+                type: "post",
+                url: "@Url.Action("Detalhes", "RSSFeed")",
+                dataType: "json",
+                data: { "id": id, "maxnot": qtd },
+                success: function (dados) {
+                    //console.log(dados);
+                    $("#feednome").html(nome);
+                    $("#descId").val(id);
+                    $("#movimentacoesRSS").html("");
+                    if (dados.constructor == Array) {
+                        var texto = "";
+
+                        for (var x = 0; x < dados.length; x++) {
+                            texto = "<dl> \
+                                       <dt><b>"+dados[x].Title.Text+"</b></dt>\
+                                          <dd>"+dados[x].Summary.Text+"</dd> \
+                                     </dl>";
+                            $("#movimentacoesRSS").append(texto);
+                        }
+                    }
+                    //console.log(dados);
+                },
+                error: function(req,erro,msg) {
+                    alert("Erro na requisicao");
+                    $("#movimentacoesRSS").html("");
+                    console.log(req);
+                    console.log(erro);
+                    console.log(msg);
+                }
+            });
+        }
+
+        function CarregueRSS(id) {
+            $.ajax({
+                type: "post",
+                url: "@Url.Action("CarregaRSS","RSSFeed")",
+                dataType: "json",
+                data: { "id": id },
+                success: function (dados) {
+                    if (dados.hasOwnProperty("nome")) {
+                        $("#btncancelar").click();
+                        $("#id").val(dados.id);
+                        $("#donoid").val(dados.iddono);
+                        $("#nomefeed").val(dados.nome);
+                        $("#caminhorss").val(dados.caminhofeed);
+                        $("#btnremover").show();
+                        $("html, body").animate({ scrollTop: $("#rssform").offset().top }, 500);
+                    }
+                    else {
+                        alert("Falha no retorno do servidor");
+                        if(typeof console !== "undefined")
+                            console.log(dados);
+                    }
+                },
+                error: function (req, erro, msg) {
+                    alert("Erro na requisicao ao servidor");
+                    if (typeof console !== "undefined") {
+                        console.log(req);
+                        console.log(erro);
+                        console.log(msg);
+                    }
+                }
+            });
+        }
+
+        function RemoveDaLista(id) {
+            $.ajax({
+                type: "post",
+                url: "@Url.Action("RemoveDaListaPessoal","RSSFeed")",
+                dataType: "json",
+                data: { "id": id },
+                success: function (dados) {
+                    if (dados.hasOwnProperty("Sucesso") && dados.Sucesso) {
+                        alert("RSS feed removido com sucesso na sua lista pessoal !");
+                        tabela.fnClearTable();
+                        desenhaTabela();
+                    }
+                    else {
+                        if (typeof console !== "undefined") {
+                            console.log(dados);
+                        }
+                    }
+                },
+                error: function (req, erro, msg) {
+                    alert("Falha na requisicao ao servidor");
+                    if (typeof console !== "undefined") {
+                        console.log(req);
+                        console.log(erro);
+                        console.log(msg);
+                    }
+                }
+            });
+        }
+
+        function PoeNaLista(id) {
+            $.ajax({
+                type: "post",
+                url: "@Url.Action("PoeNaListaPessoal","RSSFeed")",
+                dataType: "json",
+                data: { "id": id },
+                success: function (dados) {
+                    if(dados.hasOwnProperty("Sucesso") && dados.Sucesso) {
+                        alert("Feed adicionado com sucesso na lista pessoal");
+                        tabela.fnClearTable();
+                        desenhaTabela();
+                    }
+                },
+                error: function (req, erro, msg) {
+                    alert("Falha na requisição");
+                    if (typeof console !== "undefined")
+                    {
+                        console.log(req);
+                        console.log(erro);
+                        console.log(msg);
+                    }
+                }
+            });
+        }
+
+
+        $(document).ready(function () {
+            //var tabela;
+/*
+            function desenhaTabela() {
+
+                tabela = $("#listaRSS").dataTable({
+                    "sPaginationType": "full_numbers",
+                    "bDestroy": true,
+                    "bAutoWidth": false,
+                    "language":
+                        {
+                            "sEmptyTable": "Nenhum registro encontrado",
+                            "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+                            "sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
+                            "sInfoFiltered": "(Filtrados de _MAX_ registros)",
+                            "sInfoPostFix": "",
+                            "sInfoThousands": ".",
+                            "sLengthMenu": "Mostrando _MENU_ resultados por página",
+                            "sLoadingRecords": "Carregando...",
+                            "sProcessing": "Processando...",
+                            "sZeroRecords": "Nenhum registro encontrado",
+                            "sSearch": "Pesquisar",
+                            "oPaginate": {
+                                "sNext": "Próximo",
+                                "sPrevious": "Anterior",
+                                "sFirst": "Primeiro",
+                                "sLast": "Último"
+                            },
+                            "oAria": {
+                                "sSortAscending": ": Ordenar colunas de forma ascendente",
+                                "sSortDescending": ": Ordenar colunas de forma descendente"
+                            }
+                        },
+                    "tableTools": {
+                        "sSwfPath": ""
+                    }
+                });
+                
+
+            }
+            */
+            desenhaTabela();
+
+            /////////////////////// Descreve RSS ////////////////////////
+            $("#feedTodas").click(function (e) {
+                e.preventDefault();                
+                if ($("#descId").val() != "0") {
+                    VisualizaRSS($("#descId").val(), $("#feednome").html(), 0);
+                }
+                else
+                    alert("Nenhum RSS Feed atualmente carregado");
+            });
+            
+            //////////////////////// Fim Descreve RSS /////////////////
+
+            //////////////////////// Busca RSS ////////////////////////
+
+            validabusca = $("#formbuscarss").validate({
+                rules: {
+                    rssbusca: {
+                        required: true
+                    }
+                },
+                messages: {
+                    rssbusca: {
+                        required: "Campo obrigatório"
+                    }
+                },
+                errorPlacement: function (erro, elemento) {
+                    $("#v" + $(elemento).attr("id")).html($(erro).html());
+                    $("#fg" + $(elemento).attr("id")).addClass("has-error");
+                },
+                success: function (label) {
+                    var rotulo = $(label).attr("id").replace("-error", "");
+                    $("#v" + rotulo).html("");
+                    $("#fg" + rotulo).removeClass("has-error");
+                }
+            });
+
+            $("#btnbuscar").click(function (e) {
+                e.preventDefault();
+                if ($("#formbuscarss").valid()) {
+                    //alert($("#formbuscarss").serialize());
+                    var botaoAdicionar = "<a href=\"javascript:PoeNaLista(#id)\" class=\"btn btn-success btn-xs #extraclass\" title=\"Você pode adicionar a sua lista RSS pessoal\"><span class=\"glyphicon glyphicon-plus\"></span></a>"; 
+                    var botaoRemover = "<a href=\"javascript:RemoveDaLista(#id)\" class=\"btn btn-danger btn-xs #extraclass\" title=\"Remova o RSS Feed da sua lista pessoal\"><span class=\"glyphicon glyphicon-minus\"></span></a>";
+                    var botaoEditar = "<a href=\"javascript:CarregueRSS(#id)\" class=\"btn btn-warning btn-xs #extraclass\" title=\"Você pode editar os detalhes desse RSS, você é o dono e só você ou ninguém está usando\"><span class=\"glyphicon glyphicon-pencil\"></span></a>";
+                    var botaoExibir = "<a href=\"javascript:VisualizaRSS(#id,#nome,3)\" class=\"btn btn-primary btn-xs\" title=\"Ver o RSS\"><span class=\"glyphicon glyphicon-search\"></span></a> ";
+                    
+                    ///TODO:: Buscar 
+                    $.ajax({
+                        type: "post",
+                        url: "@Url.Action("BuscaRSSCondicional","RSSFeed")",
+                        dataType: "json",
+                        data: $("#formbuscarss").serialize(),
+                        success: function (resultado) {
+                            console.log(resultado);
+                            var novalinha = "";
+                            tabela.fnClearTable();
+                            for (var x = 0; x < resultado.length; x++) {
+                                novalinha = "<tr>\
+                                                <td><img src=\"http://www.google.com/s2/favicons?domain_url=" + resultado[x].caminho + "\" style=\"margin: 0; padding: 0; width: 20px;\" > </img></td>   \
+                                                <td>"+resultado[x].nome+" </td>   \
+                                                <td>"+resultado[x].caminho+"</td>   \
+                                                <td> " + (resultado[x].adicionar ? "Não" : "Sim") + "</td>   \
+                                                <td> " + (resultado[x].qtdusando) + "</td>   \
+                                                <td>" + botaoAdicionar.replace("#id", resultado[x].id).replace("#extraclass", (resultado[x].adicionar ? "" : "disabled")) +
+                                                        botaoRemover.replace("#id", resultado[x].id).replace("#extraclass", (resultado[x].remover ? "" : "disabled")) +
+                                                        botaoEditar.replace("#id", resultado[x].id).replace("#extraclass", (resultado[x].editar ? "" : "disabled")) +
+                                                        botaoExibir.replace("#id", resultado[x].id).replace("#nome","'"+resultado[x].nome+"'")+
+                                                "</td>   \
+                                             </tr>";
+                                $("#idcorpotabela").append(novalinha);
+                                ///TODO: as funcoes dos links !!!!
+                            }
+                            desenhaTabela();
+                            if (resultado.length == 0)
+                                alert("Nenhum registro encontrado");
+                        },
+                        error: function (req, erro, msg) {
+                            console.log(req);
+                            console.log(erro);
+                            console.log(msg);
+                            alert("Erro na request");
+                        }
+                    });
+                }
+                else
+                    alert("Não é valido");
+            });
+
+            $("#btncancelarbusca").click(function () {
+                $("#formbuscarss div.form-group").removeClass("has-error");
+                $("#formbuscarss div.erroMsg").html("");
+                validabusca.resetForm();
+            });
+
+            //////////////////////// Fim Busca RSS ////////////////////////
+            
+            /////////////////////// Fomulario de Cadastro RSS //////////////////////////
+
+
+            validacadastro = $("#rssform").validate({
+                rules: {
+                    nomefeed: {
+                        required: true
+                    },
+                    caminhorss: {
+                        required: true,
+                        url: true
+                    }
+                },
+                messages: {
+                    nomefeed: {
+                        required: "Campo obrigatório",
+                    },
+                    caminhorss: {
+                        required: "Campo obrigatório",
+                        url: "Defina uma URL válida"
+                    }
+                },
+                errorPlacement: function (erro, elemento) {
+                    $("#v" + $(elemento).attr("id")).html($(erro).html());
+                    $("#fg" + $(elemento).attr("id")).addClass("has-error");
+                },
+                success: function (label) {
+                    var rotulo = $(label).attr("id").replace("-error", "");
+                    $("#v" + rotulo).html("");
+                    $("#fg" + rotulo).removeClass("has-error");
+                }
+            });
+            
+            $("#btncancelar").click(function (e) {
+                $("#rssform div.form-group").removeClass("has-error");
+                $("#rssform div.erroMsg").html("");                
+                $("#btnremover").hide();               
+                validacadastro.resetForm();
+                $("#rssform")[0].reset();
+            });
+
+            $("#btnqueronovo").click(function (e) {
+                e.preventDefault();
+                $("#btncancelar").click();
+                $("html, body").animate({ scrollTop: ($("#rssform").offset().top-100) }, 500);
+            });
+            
+            $("#btngravar").click(function (e) {
+                e.preventDefault();
+                //alert("lalal");
+                if ($("#rssform").valid()) {
+                    console.log($("#rssform").serialize());
+                    $.ajax({
+                        type: "post",
+                        url: "@Url.Action("GravarCadastro","RSSFeed")",
+                        dataType: "json",
+                        data: $("#rssform").serialize(),
+                        success: function (dados) {
+                            if (dados.hasOwnProperty("Sucesso") && dados.Sucesso) {
+                                alert("Os dados foram gravados com sucesso !");
+                                $("#btncancelar").click();
+                                tabela.fnClearTable();
+                                desenhaTabela();
+                                limpaVisualizacao();
+                            }
+                            else {
+                                alert("Erro: O servidor nao conseguiu gravar seus dados.");
+                                if (typeof console !== "undefined") {
+                                    console.log(dados);
+                                }
+                            }
+                        },
+                        error: function (req, erro, msg) {
+                            alert("Falha na requisicao ao servidor !");
+                            if (typeof console !== "undefined") {
+                                console.log(req);
+                                console.log(erro);
+                                console.log(msg);
+                            }
+                        }
+                    });
+                }
+                else
+                    alert("Alguns erros de validação foram econtrados, por favor, corriga-os antes de prosseguir. ");
+            });
+
+            $("#btnremover").click(function (e) {
+                e.preventDefault();
+                if (confirm("Realmente deseja excluir ? ") && $("#id").val() != "0") {
+                    $.ajax({
+                        type: "post",
+                        url: "@Url.Action("Remover","RSSFeed")",
+                        dataType: "json",
+                        data: { "id": $("#id").val() },
+                        success: function (dados) {
+                            if (dados.hasOwnProperty("Sucesso") && dados.Sucesso) {
+                                alert("Remoção efetuada com sucesso !");
+                                $("#btncancelar").click();
+                                tabela.fnClearTable();
+                                desenhaTabela();
+                                limpaVisualizacao();
+                            }
+                            else {
+                                alert("Resultado desconhecido, o servidor não retornou um formato válido");
+                                if (typeof console !== "undefined")
+                                    console.log(dados);
+                            }
+                        },
+                        error: function (req, erro, msg) {
+                            alert("Falha ao requisitar o servidor");
+                            if (typeof console !== "undefined") {
+                                console.log(req);
+                                console.log(erro);
+                                console.log(msg);
+                            }
+                        }
+                    });
+                }
+            });
+
+            $("#btncancelar").click();
+            ///////////////////// Fim Formulario de cadastro RSS///////////////////////
+
+        });
+
+
+    </script>
+}

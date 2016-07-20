@@ -1,0 +1,11 @@
+﻿@{
+    Layout = null;
+}
+
+@model Boolean
+
+
+@Html.DropDownList("",new SelectList(new[]
+                              {   new { Value="true" ,Text = "Sim" },
+                                  new { Value="false" ,Text = "Nao" },
+                              },"Value","Text"),Model)

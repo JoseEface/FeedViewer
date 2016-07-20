@@ -1,0 +1,1098 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{5EBBE7E4-ACFB-4F38-9917-49390516D69F}</ProjectGuid>
+    <ProjectTypeGuids>{E3E379DF-F4C6-4180-9B81-6769533ABE47};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FeedViewer</RootNamespace>
+    <AssemblyName>FeedViewer</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.ReportViewer.Common, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Report.Viewer.11.0.0.0\lib\net\Microsoft.ReportViewer.Common.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.ProcessingObjectModel, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Report.Viewer.11.0.0.0\lib\net\Microsoft.ReportViewer.ProcessingObjectModel.DLL</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Report.Viewer.11.0.0.0\lib\net\Microsoft.ReportViewer.WebForms.DLL</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MySql.Data, Version=6.8.3.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Configuration.Install" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Mvc.FixedDisplayModes, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.FixedDisplayModes.1.0.0\lib\net40\Microsoft.Web.Mvc.FixedDisplayModes.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.4.0.20710.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.4.0.20710.0\lib\net40\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.4.0.20710.0\lib\net40\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.20710.0\lib\net40\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.0.0\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Providers">
+      <HintPath>..\packages\Microsoft.AspNet.Providers.Core.1.2\lib\net40\System.Web.Providers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.2.0.20715.0\lib\net40\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.3.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.3.0\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\Autenticacao\FeedViewerProvider.cs" />
+    <Compile Include="Controllers\Autenticacao\NoCache.cs" />
+    <Compile Include="Controllers\Autenticacao\SemCache.cs" />
+    <Compile Include="Controllers\Autenticacao\SemCacheNovo.cs" />
+    <Compile Include="Controllers\dsPersonalizado.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsPersonalizado.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\RelatorioController.cs" />
+    <Compile Include="Controllers\RSSFeedController.cs" />
+    <Compile Include="Controllers\TesteController.cs" />
+    <Compile Include="Controllers\UsuarioController.cs" />
+    <Compile Include="feedviewerDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>feedviewerDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="feedviewerDs.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>feedviewerDs.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LoginUsuario.cs" />
+    <Compile Include="Models\LoginInfo.cs" />
+    <Compile Include="Models\StatusAJAX.cs" />
+    <Compile Include="Models\feedrss.cs" />
+    <Compile Include="Models\feedviewerContext.cs" />
+    <Compile Include="Models\Mapping\feedrssMap.cs" />
+    <Compile Include="Models\Mapping\usuarioMap.cs" />
+    <Compile Include="Models\Mapping\usuariorssMap.cs" />
+    <Compile Include="Models\usuario.cs" />
+    <Compile Include="Models\usuariorss.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\jquery-ui.css" />
+    <Content Include="Content\themes\base\jquery.ui.accordion.css" />
+    <Content Include="Content\themes\base\jquery.ui.all.css" />
+    <Content Include="Content\themes\base\jquery.ui.autocomplete.css" />
+    <Content Include="Content\themes\base\jquery.ui.base.css" />
+    <Content Include="Content\themes\base\jquery.ui.button.css" />
+    <Content Include="Content\themes\base\jquery.ui.core.css" />
+    <Content Include="Content\themes\base\jquery.ui.datepicker.css" />
+    <Content Include="Content\themes\base\jquery.ui.dialog.css" />
+    <Content Include="Content\themes\base\jquery.ui.progressbar.css" />
+    <Content Include="Content\themes\base\jquery.ui.resizable.css" />
+    <Content Include="Content\themes\base\jquery.ui.selectable.css" />
+    <Content Include="Content\themes\base\jquery.ui.slider.css" />
+    <Content Include="Content\themes\base\jquery.ui.tabs.css" />
+    <Content Include="Content\themes\base\jquery.ui.theme.css" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\minified\jquery-ui.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.accordion.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.autocomplete.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.button.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.core.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.datepicker.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.dialog.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.progressbar.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.resizable.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.selectable.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="Content\themes\gentelella\css\animate.min.css" />
+    <Content Include="Content\themes\gentelella\css\bootstrap.min.css" />
+    <Content Include="Content\themes\gentelella\css\calendar\fullcalendar.css" />
+    <Content Include="Content\themes\gentelella\css\calendar\fullcalendar.min.css" />
+    <Content Include="Content\themes\gentelella\css\calendar\fullcalendar.print.css" />
+    <Content Include="Content\themes\gentelella\css\colorpicker\alpha-horizontal.png" />
+    <Content Include="Content\themes\gentelella\css\colorpicker\alpha.png" />
+    <Content Include="Content\themes\gentelella\css\colorpicker\bootstrap-colorpicker.min.css" />
+    <Content Include="Content\themes\gentelella\css\colorpicker\hue-horizontal.png" />
+    <Content Include="Content\themes\gentelella\css\colorpicker\hue.png" />
+    <Content Include="Content\themes\gentelella\css\colorpicker\saturation.png" />
+    <Content Include="Content\themes\gentelella\css\custom.css" />
+    <Content Include="Content\themes\gentelella\css\datatables\css\demo_page.css" />
+    <Content Include="Content\themes\gentelella\css\datatables\css\demo_table.css" />
+    <Content Include="Content\themes\gentelella\css\datatables\css\demo_table_jui.css" />
+    <Content Include="Content\themes\gentelella\css\datatables\css\jquery.dataTables.css" />
+    <Content Include="Content\themes\gentelella\css\datatables\css\jquery.dataTables_themeroller.css" />
+    <Content Include="Content\themes\gentelella\css\datatables\images\back_disabled.png" />
+    <Content Include="Content\themes\gentelella\css\datatables\images\back_enabled.png" />
+    <Content Include="Content\themes\gentelella\css\datatables\images\back_enabled_hover.png" />
+    <Content Include="Content\themes\gentelella\css\datatables\images\favicon.ico" />
+    <Content Include="Content\themes\gentelella\css\datatables\images\forward_disabled.png" />
+    <Content Include="Content\themes\gentelella\css\datatables\images\forward_enabled.png" />
+    <Content Include="Content\themes\gentelella\css\datatables\images\forward_enabled_hover.png" />
+    <Content Include="Content\themes\gentelella\css\datatables\images\sort_asc.png" />
+    <Content Include="Content\themes\gentelella\css\datatables\images\sort_asc_disabled.png" />
+    <Content Include="Content\themes\gentelella\css\datatables\images\sort_both.png" />
+    <Content Include="Content\themes\gentelella\css\datatables\images\sort_desc.png" />
+    <Content Include="Content\themes\gentelella\css\datatables\images\sort_desc_disabled.png" />
+    <Content Include="Content\themes\gentelella\css\datatables\tools\css\dataTables.tableTools.css" />
+    <Content Include="Content\themes\gentelella\css\editor\external\google-code-prettify\prettify.css" />
+    <Content Include="Content\themes\gentelella\css\editor\index.css" />
+    <Content Include="Content\themes\gentelella\css\floatexamples.css" />
+    <Content Include="Content\themes\gentelella\css\icheck\flat\aero%402x.png" />
+    <Content Include="Content\themes\gentelella\css\icheck\flat\aero.css" />
+    <Content Include="Content\themes\gentelella\css\icheck\flat\aero.png" />
+    <Content Include="Content\themes\gentelella\css\icheck\flat\blue%402x.png" />
+    <Content Include="Content\themes\gentelella\css\icheck\flat\blue.css" />
+    <Content Include="Content\themes\gentelella\css\icheck\flat\blue.png" />
+    <Content Include="Content\themes\gentelella\css\icheck\flat\flat%402x.png" />
+    <Content Include="Content\themes\gentelella\css\icheck\flat\flat.css" />
+    <Content Include="Content\themes\gentelella\css\icheck\flat\flat.png" />
+    <Content Include="Content\themes\gentelella\css\icheck\flat\green%402x.png" />
+    <Content Include="Content\themes\gentelella\css\icheck\flat\green.css" />
+    <Content Include="Content\themes\gentelella\css\icheck\flat\green.png" />
+    <Content Include="Content\themes\gentelella\css\icheck\flat\grey%402x.png" />
+    <Content Include="Content\themes\gentelella\css\icheck\flat\grey.css" />
+    <Content Include="Content\themes\gentelella\css\icheck\flat\grey.png" />
+    <Content Include="Content\themes\gentelella\css\icheck\flat\orange%402x.png" />
+    <Content Include="Content\themes\gentelella\css\icheck\flat\orange.css" />
+    <Content Include="Content\themes\gentelella\css\icheck\flat\orange.png" />
+    <Content Include="Content\themes\gentelella\css\icheck\flat\pink%402x.png" />
+    <Content Include="Content\themes\gentelella\css\icheck\flat\pink.css" />
+    <Content Include="Content\themes\gentelella\css\icheck\flat\pink.png" />
+    <Content Include="Content\themes\gentelella\css\icheck\flat\purple%402x.png" />
+    <Content Include="Content\themes\gentelella\css\icheck\flat\purple.css" />
+    <Content Include="Content\themes\gentelella\css\icheck\flat\purple.png" />
+    <Content Include="Content\themes\gentelella\css\icheck\flat\red%402x.png" />
+    <Content Include="Content\themes\gentelella\css\icheck\flat\red.css" />
+    <Content Include="Content\themes\gentelella\css\icheck\flat\red.png" />
+    <Content Include="Content\themes\gentelella\css\icheck\flat\yellow%402x.png" />
+    <Content Include="Content\themes\gentelella\css\icheck\flat\yellow.css" />
+    <Content Include="Content\themes\gentelella\css\icheck\flat\yellow.png" />
+    <Content Include="Content\themes\gentelella\css\icheck\flat\_all.css" />
+    <Content Include="Content\themes\gentelella\css\ion.rangeSlider.css" />
+    <Content Include="Content\themes\gentelella\css\ion.rangeSlider.skinFlat.css" />
+    <Content Include="Content\themes\gentelella\css\maps\jquery-jvectormap-2.0.1.css" />
+    <Content Include="Content\themes\gentelella\css\normalize.css" />
+    <Content Include="Content\themes\gentelella\css\nprogress.css" />
+    <Content Include="Content\themes\gentelella\css\progressbar\bootstrap-progressbar-3.3.0.css" />
+    <Content Include="Content\themes\gentelella\css\select\select2.min.css" />
+    <Content Include="Content\themes\gentelella\css\switchery\switchery.min.css" />
+    <Content Include="Content\themes\gentelella\fonts\css\font-awesome.css" />
+    <Content Include="Content\themes\gentelella\fonts\css\font-awesome.min.css" />
+    <Content Include="Content\themes\gentelella\fonts\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\themes\gentelella\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\themes\gentelella\images\1.png" />
+    <Content Include="Content\themes\gentelella\images\4.jpg" />
+    <Content Include="Content\themes\gentelella\images\american-express.png" />
+    <Content Include="Content\themes\gentelella\images\back_disabled.png" />
+    <Content Include="Content\themes\gentelella\images\back_enabled.png" />
+    <Content Include="Content\themes\gentelella\images\back_enabled_hover.png" />
+    <Content Include="Content\themes\gentelella\images\bootstrap-colorpicker\alpha-horizontal.png" />
+    <Content Include="Content\themes\gentelella\images\bootstrap-colorpicker\alpha.png" />
+    <Content Include="Content\themes\gentelella\images\bootstrap-colorpicker\hue-horizontal.png" />
+    <Content Include="Content\themes\gentelella\images\bootstrap-colorpicker\hue.png" />
+    <Content Include="Content\themes\gentelella\images\bootstrap-colorpicker\saturation.png" />
+    <Content Include="Content\themes\gentelella\images\data.png" />
+    <Content Include="Content\themes\gentelella\images\favicon.ico" />
+    <Content Include="Content\themes\gentelella\images\forward_disabled.png" />
+    <Content Include="Content\themes\gentelella\images\forward_enabled.png" />
+    <Content Include="Content\themes\gentelella\images\forward_enabled_hover.png" />
+    <Content Include="Content\themes\gentelella\images\icons.png" />
+    <Content Include="Content\themes\gentelella\images\img.jpg" />
+    <Content Include="Content\themes\gentelella\images\mastercard.png" />
+    <Content Include="Content\themes\gentelella\images\paypal2.png" />
+    <Content Include="Content\themes\gentelella\images\picture-2.jpg" />
+    <Content Include="Content\themes\gentelella\images\picture.jpg" />
+    <Content Include="Content\themes\gentelella\images\picture2.jpg" />
+    <Content Include="Content\themes\gentelella\images\prod1.jpg" />
+    <Content Include="Content\themes\gentelella\images\prod2.jpg" />
+    <Content Include="Content\themes\gentelella\images\prod3.jpg" />
+    <Content Include="Content\themes\gentelella\images\prod4.jpg" />
+    <Content Include="Content\themes\gentelella\images\prod5.jpg" />
+    <Content Include="Content\themes\gentelella\images\sort_asc.png" />
+    <Content Include="Content\themes\gentelella\images\sort_asc_disabled.png" />
+    <Content Include="Content\themes\gentelella\images\sort_both.png" />
+    <Content Include="Content\themes\gentelella\images\sort_desc.png" />
+    <Content Include="Content\themes\gentelella\images\sort_desc_disabled.png" />
+    <Content Include="Content\themes\gentelella\images\sprite-skin-flat.png" />
+    <Content Include="Content\themes\gentelella\images\sprite-skin-modern.png" />
+    <Content Include="Content\themes\gentelella\images\sprite-skin-nice.png" />
+    <Content Include="Content\themes\gentelella\images\sprite-skin-simple.png" />
+    <Content Include="Content\themes\gentelella\images\user.png" />
+    <Content Include="Content\themes\gentelella\images\visa.png" />
+    <Content Include="Content\themes\gentelella\js\autocomplete\countries.js" />
+    <Content Include="Content\themes\gentelella\js\autocomplete\jquery.autocomplete.js" />
+    <Content Include="Content\themes\gentelella\js\bootstrap.min.js" />
+    <Content Include="Content\themes\gentelella\js\calendar\fullcalendar.min.js" />
+    <Content Include="Content\themes\gentelella\js\chartjs\chart.min.js" />
+    <Content Include="Content\themes\gentelella\js\colorpicker\bootstrap-colorpicker.js" />
+    <Content Include="Content\themes\gentelella\js\colorpicker\docs.js" />
+    <Content Include="Content\themes\gentelella\js\cropping\cropper.min.js" />
+    <Content Include="Content\themes\gentelella\js\cropping\main.js" />
+    <Content Include="Content\themes\gentelella\js\cropping\main2.js" />
+    <Content Include="Content\themes\gentelella\js\custom.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\images\back_disabled.png" />
+    <Content Include="Content\themes\gentelella\js\datatables\images\back_enabled.png" />
+    <Content Include="Content\themes\gentelella\js\datatables\images\back_enabled_hover.png" />
+    <Content Include="Content\themes\gentelella\js\datatables\images\favicon.ico" />
+    <Content Include="Content\themes\gentelella\js\datatables\images\forward_disabled.png" />
+    <Content Include="Content\themes\gentelella\js\datatables\images\forward_enabled.png" />
+    <Content Include="Content\themes\gentelella\js\datatables\images\forward_enabled_hover.png" />
+    <Content Include="Content\themes\gentelella\js\datatables\images\sort_asc.png" />
+    <Content Include="Content\themes\gentelella\js\datatables\images\sort_asc_disabled.png" />
+    <Content Include="Content\themes\gentelella\js\datatables\images\sort_both.png" />
+    <Content Include="Content\themes\gentelella\js\datatables\images\sort_desc.png" />
+    <Content Include="Content\themes\gentelella\js\datatables\images\sort_desc_disabled.png" />
+    <Content Include="Content\themes\gentelella\js\datatables\js\jquery.dataTables.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\js\jquery.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\src\api\api.internal.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\src\api\api.methods.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\src\api\api.static.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\src\core\core.ajax.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\src\core\core.columns.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\src\core\core.compat.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\src\core\core.constructor.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\src\core\core.data.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\src\core\core.draw.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\src\core\core.filter.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\src\core\core.info.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\src\core\core.init.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\src\core\core.length.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\src\core\core.page.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\src\core\core.processing.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\src\core\core.scrolling.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\src\core\core.sizing.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\src\core\core.sort.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\src\core\core.state.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\src\core\core.support.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\src\DataTables.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\src\ext\ext.classes.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\src\ext\ext.paging.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\src\ext\ext.sorting.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\src\ext\ext.types.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\src\model\model.column.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\src\model\model.defaults.columns.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\src\model\model.defaults.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\src\model\model.ext.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\src\model\model.row.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\src\model\model.search.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\src\model\model.settings.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\tools\examples\alter_buttons.xml" />
+    <Content Include="Content\themes\gentelella\js\datatables\tools\examples\bootstrap.xml" />
+    <Content Include="Content\themes\gentelella\js\datatables\tools\examples\button_text.xml" />
+    <Content Include="Content\themes\gentelella\js\datatables\tools\examples\collection.xml" />
+    <Content Include="Content\themes\gentelella\js\datatables\tools\examples\defaults.xml" />
+    <Content Include="Content\themes\gentelella\js\datatables\tools\examples\index.xml" />
+    <Content Include="Content\themes\gentelella\js\datatables\tools\examples\multiple_tables.xml" />
+    <Content Include="Content\themes\gentelella\js\datatables\tools\examples\multi_instance.xml" />
+    <Content Include="Content\themes\gentelella\js\datatables\tools\examples\new_init.xml" />
+    <Content Include="Content\themes\gentelella\js\datatables\tools\examples\pdf_message.xml" />
+    <Content Include="Content\themes\gentelella\js\datatables\tools\examples\plug-in.xml" />
+    <Content Include="Content\themes\gentelella\js\datatables\tools\examples\select_column.xml" />
+    <Content Include="Content\themes\gentelella\js\datatables\tools\examples\select_multi.xml" />
+    <Content Include="Content\themes\gentelella\js\datatables\tools\examples\select_os.xml" />
+    <Content Include="Content\themes\gentelella\js\datatables\tools\examples\select_single.xml" />
+    <Content Include="Content\themes\gentelella\js\datatables\tools\examples\simple.xml" />
+    <Content Include="Content\themes\gentelella\js\datatables\tools\examples\swf_path.xml" />
+    <Content Include="Content\themes\gentelella\js\datatables\tools\images\background.png" />
+    <Content Include="Content\themes\gentelella\js\datatables\tools\images\collection.png" />
+    <Content Include="Content\themes\gentelella\js\datatables\tools\images\collection_hover.png" />
+    <Content Include="Content\themes\gentelella\js\datatables\tools\images\copy.png" />
+    <Content Include="Content\themes\gentelella\js\datatables\tools\images\copy_hover.png" />
+    <Content Include="Content\themes\gentelella\js\datatables\tools\images\csv.png" />
+    <Content Include="Content\themes\gentelella\js\datatables\tools\images\csv_hover.png" />
+    <Content Include="Content\themes\gentelella\js\datatables\tools\images\pdf.png" />
+    <Content Include="Content\themes\gentelella\js\datatables\tools\images\pdf_hover.png" />
+    <Content Include="Content\themes\gentelella\js\datatables\tools\images\print.png" />
+    <Content Include="Content\themes\gentelella\js\datatables\tools\images\print_hover.png" />
+    <Content Include="Content\themes\gentelella\js\datatables\tools\images\xls.png" />
+    <Content Include="Content\themes\gentelella\js\datatables\tools\images\xls_hover.png" />
+    <Content Include="Content\themes\gentelella\js\datatables\tools\js\dataTables.tableTools.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\tools\Readme.txt" />
+    <Content Include="Content\themes\gentelella\js\datatables\tools\src\dataTables.tableTools.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\tools\src\TableTools.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\tools\src\ZeroClipboard.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\tools\swf\copy_csv_xls.swf" />
+    <Content Include="Content\themes\gentelella\js\datatables\tools\swf\copy_csv_xls_pdf.swf" />
+    <Content Include="Content\themes\gentelella\js\datatables\tools\TableTools-master\css\dataTables.tableTools.css" />
+    <Content Include="Content\themes\gentelella\js\datatables\tools\TableTools-master\examples\alter_buttons.xml" />
+    <Content Include="Content\themes\gentelella\js\datatables\tools\TableTools-master\examples\bootstrap.xml" />
+    <Content Include="Content\themes\gentelella\js\datatables\tools\TableTools-master\examples\button_text.xml" />
+    <Content Include="Content\themes\gentelella\js\datatables\tools\TableTools-master\examples\collection.xml" />
+    <Content Include="Content\themes\gentelella\js\datatables\tools\TableTools-master\examples\defaults.xml" />
+    <Content Include="Content\themes\gentelella\js\datatables\tools\TableTools-master\examples\index.xml" />
+    <Content Include="Content\themes\gentelella\js\datatables\tools\TableTools-master\examples\multiple_tables.xml" />
+    <Content Include="Content\themes\gentelella\js\datatables\tools\TableTools-master\examples\multi_instance.xml" />
+    <Content Include="Content\themes\gentelella\js\datatables\tools\TableTools-master\examples\new_init.xml" />
+    <Content Include="Content\themes\gentelella\js\datatables\tools\TableTools-master\examples\pdf_message.xml" />
+    <Content Include="Content\themes\gentelella\js\datatables\tools\TableTools-master\examples\plug-in.xml" />
+    <Content Include="Content\themes\gentelella\js\datatables\tools\TableTools-master\examples\select_column.xml" />
+    <Content Include="Content\themes\gentelella\js\datatables\tools\TableTools-master\examples\select_multi.xml" />
+    <Content Include="Content\themes\gentelella\js\datatables\tools\TableTools-master\examples\select_os.xml" />
+    <Content Include="Content\themes\gentelella\js\datatables\tools\TableTools-master\examples\select_single.xml" />
+    <Content Include="Content\themes\gentelella\js\datatables\tools\TableTools-master\examples\simple.xml" />
+    <Content Include="Content\themes\gentelella\js\datatables\tools\TableTools-master\examples\swf_path.xml" />
+    <Content Include="Content\themes\gentelella\js\datatables\tools\TableTools-master\images\background.png" />
+    <Content Include="Content\themes\gentelella\js\datatables\tools\TableTools-master\images\collection.png" />
+    <Content Include="Content\themes\gentelella\js\datatables\tools\TableTools-master\images\collection_hover.png" />
+    <Content Include="Content\themes\gentelella\js\datatables\tools\TableTools-master\images\copy.png" />
+    <Content Include="Content\themes\gentelella\js\datatables\tools\TableTools-master\images\copy_hover.png" />
+    <Content Include="Content\themes\gentelella\js\datatables\tools\TableTools-master\images\csv.png" />
+    <Content Include="Content\themes\gentelella\js\datatables\tools\TableTools-master\images\csv_hover.png" />
+    <Content Include="Content\themes\gentelella\js\datatables\tools\TableTools-master\images\pdf.png" />
+    <Content Include="Content\themes\gentelella\js\datatables\tools\TableTools-master\images\pdf_hover.png" />
+    <Content Include="Content\themes\gentelella\js\datatables\tools\TableTools-master\images\print.png" />
+    <Content Include="Content\themes\gentelella\js\datatables\tools\TableTools-master\images\print_hover.png" />
+    <Content Include="Content\themes\gentelella\js\datatables\tools\TableTools-master\images\xls.png" />
+    <Content Include="Content\themes\gentelella\js\datatables\tools\TableTools-master\images\xls_hover.png" />
+    <Content Include="Content\themes\gentelella\js\datatables\tools\TableTools-master\js\dataTables.tableTools.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\tools\TableTools-master\Readme.txt" />
+    <Content Include="Content\themes\gentelella\js\datatables\tools\TableTools-master\src\dataTables.tableTools.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\tools\TableTools-master\src\TableTools.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\tools\TableTools-master\src\ZeroClipboard.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\tools\TableTools-master\swf\copy_csv_xls.swf" />
+    <Content Include="Content\themes\gentelella\js\datatables\tools\TableTools-master\swf\copy_csv_xls_pdf.swf" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\controller.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\controller.php" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\index.html" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\performance\draw.html" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\performance\large.php" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\performance\page.html" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\performance\sort.html" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\templates\-complex_header.php" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\templates\2512.php" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\templates\6776.php" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\templates\complex_header_2.php" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\templates\deferred_table.php" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\templates\dom_data.php" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\templates\dom_data_th.php" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\templates\dom_data_two_headers.php" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\templates\dymanic_table.php" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\templates\empty_table.php" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\templates\html_table.php" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\templates\js_data.php" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\templates\js_data_mixed_types.php" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\templates\two_tables.php" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\1_dom\-complex_header.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\1_dom\-iDraw.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\1_dom\2512.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\1_dom\2530-2.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\1_dom\2530.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\1_dom\2569.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\1_dom\2600.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\1_dom\2608.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\1_dom\2635.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\1_dom\2746-stable-sort.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\1_dom\2799.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\1_dom\2840-restore-table-width.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\1_dom\2914-state-save-sort.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\1_dom\5396-fnUpdate-arrays-mData.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\1_dom\5396-fnUpdate-arrays.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\1_dom\5508-xscroll-zero-content.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\1_dom\6776-scrolling-table-grows.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\1_dom\aaSorting.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\1_dom\aaSortingFixed.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\1_dom\aoColumns.bSearchable.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\1_dom\aoColumns.bSortable.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\1_dom\aoColumns.bUseRendered.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\1_dom\aoColumns.bVisible.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\1_dom\aoColumns.bVisible2.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\1_dom\aoColumns.fnRender.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\1_dom\aoColumns.iDataSort.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\1_dom\aoColumns.sClass.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\1_dom\aoColumns.sName.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\1_dom\aoColumns.sTitle.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\1_dom\aoColumns.sWidth.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\1_dom\aoSearchCols.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\1_dom\asStripClasses.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\1_dom\bAutoWidth.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\1_dom\bFilter.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\1_dom\bInfiniteScroll.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\1_dom\bInfo.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\1_dom\bJQueryUI.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\1_dom\bLengthChange.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\1_dom\bPaginate.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\1_dom\bProcessing.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\1_dom\bServerSide.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\1_dom\bSort.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\1_dom\bSortCellsTop.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\1_dom\bSortClasses.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\1_dom\fnCookieCallback.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\1_dom\fnCreatedCell.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\1_dom\fnCreatedRow.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\1_dom\fnDeleteRow.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\1_dom\fnDrawCallback.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\1_dom\fnFilter.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\1_dom\fnFooterCallback.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\1_dom\fnHeaderCallback.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\1_dom\fnInfoCallback.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\1_dom\fnInitComplete.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\1_dom\fnRowCallback.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\1_dom\fnSetColumnVis.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\1_dom\fnSetColumnVis2.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\1_dom\gh125 - stripe stripping.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\1_dom\html-autodetect-sort.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\1_dom\iDisplayLength.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\1_dom\oLanguage.oPaginate.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\1_dom\oLanguage.sInfo.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\1_dom\oLanguage.sInfoEmpty.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\1_dom\oLanguage.sInfoPostFix.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\1_dom\oLanguage.sLengthMenu.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\1_dom\oLanguage.sProcessing.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\1_dom\oLanguage.sSearch.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\1_dom\oLanguage.sUrl.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\1_dom\oLanguage.sZeroRecords.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\1_dom\oSearch.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\1_dom\sAjaxSource.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\1_dom\sDom.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\1_dom\sPaginationType.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\1_dom\sScrollXY.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\1_dom\th_in_body.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\1_dom\_getDataFunctions.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\1_dom\_setDataFunctions.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\1_dom\_zero_config.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\2_js\39-nested-null.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\2_js\6872-default-content-missing-props.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\2_js\8549--string-sorting-nonstrings.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\2_js\aaSorting.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\2_js\aaSortingFixed.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\2_js\aoColumns.bSearchable.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\2_js\aoColumns.bSortable.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\2_js\aoColumns.bUseRendered.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\2_js\aoColumns.bVisible.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\2_js\aoColumns.fnRender.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\2_js\aoColumns.iDataSort.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\2_js\aoColumns.sClass.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\2_js\aoColumns.sName.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\2_js\aoColumns.sTitle.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\2_js\aoColumns.sWidth.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\2_js\aoSearchCols.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\2_js\asStripClasses.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\2_js\bAutoWidth.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\2_js\bFilter.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\2_js\bInfo.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\2_js\bLengthChange.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\2_js\bPaginate.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\2_js\bProcessing.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\2_js\bServerSide.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\2_js\bSort.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\2_js\bSortClasses.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\2_js\fnCreatedCell.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\2_js\fnCreatedRow.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\2_js\fnDrawCallback.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\2_js\fnFooterCallback.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\2_js\fnHeaderCallback.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\2_js\fnInitComplete.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\2_js\fnRowCallback.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\2_js\iDisplayLength.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\2_js\js_data_mixed_types.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\2_js\oLanguage.oPaginate.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\2_js\oLanguage.sInfo.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\2_js\oLanguage.sInfoEmpty.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\2_js\oLanguage.sInfoPostFix.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\2_js\oLanguage.sLengthMenu.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\2_js\oLanguage.sProcessing.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\2_js\oLanguage.sSearch.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\2_js\oLanguage.sUrl.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\2_js\oLanguage.sZeroRecords.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\2_js\oSearch.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\2_js\sAjaxSource.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\2_js\sDom.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\2_js\sPaginationType.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\2_js\_zero_config.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\3_ajax\aaSorting.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\3_ajax\aaSortingFixed.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\3_ajax\aoColumns.bSearchable.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\3_ajax\aoColumns.bSortable.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\3_ajax\aoColumns.bUseRendered.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\3_ajax\aoColumns.bVisible.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\3_ajax\aoColumns.fnRender.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\3_ajax\aoColumns.iDataSort.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\3_ajax\aoColumns.sClass.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\3_ajax\aoColumns.sName.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\3_ajax\aoColumns.sTitle.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\3_ajax\aoColumns.sWidth.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\3_ajax\aoSearchCols.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\3_ajax\asStripClasses.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\3_ajax\bAutoWidth.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\3_ajax\bFilter.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\3_ajax\bInfo.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\3_ajax\bLengthChange.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\3_ajax\bPaginate.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\3_ajax\bProcessing.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\3_ajax\bServerSide.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\3_ajax\bSort.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\3_ajax\bSortClasses.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\3_ajax\fnCreatedCell.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\3_ajax\fnCreatedRow.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\3_ajax\fnDrawCallback.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\3_ajax\fnHeaderCallback.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\3_ajax\fnInitComplete.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\3_ajax\fnRowCallback.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\3_ajax\fnServerData.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\3_ajax\iDisplayLength.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\3_ajax\oLanguage.oPaginate.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\3_ajax\oLanguage.sInfo.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\3_ajax\oLanguage.sInfoEmpty.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\3_ajax\oLanguage.sInfoPostFix.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\3_ajax\oLanguage.sLengthMenu.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\3_ajax\oLanguage.sLoadingRecords.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\3_ajax\oLanguage.sProcessing.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\3_ajax\oLanguage.sSearch.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\3_ajax\oLanguage.sUrl.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\3_ajax\oLanguage.sZeroRecords.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\3_ajax\oSearch.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\3_ajax\sAjaxDataProp.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\3_ajax\sAjaxDataProp2.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\3_ajax\sAjaxSource.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\3_ajax\sDom.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\3_ajax\sPaginationType.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\3_ajax\_zero_config.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\4_server-side\-iDraw.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\4_server-side\2440.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\4_server-side\2569.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\4_server-side\2600.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\4_server-side\aaSorting.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\4_server-side\aaSortingFixed.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\4_server-side\aoColumns.bSearchable.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\4_server-side\aoColumns.bSortable.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\4_server-side\aoColumns.bUseRendered.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\4_server-side\aoColumns.bVisible.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\4_server-side\aoColumns.fnRender.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\4_server-side\aoColumns.sClass.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\4_server-side\aoColumns.sName.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\4_server-side\aoColumns.sTitle.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\4_server-side\aoColumns.sWidth.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\4_server-side\aoSearchCols.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\4_server-side\asStripClasses.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\4_server-side\bAutoWidth.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\4_server-side\bFilter.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\4_server-side\bInfiniteScroll.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\4_server-side\bInfo.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\4_server-side\bLengthChange.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\4_server-side\bPaginate.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\4_server-side\bProcessing.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\4_server-side\bServerSide.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\4_server-side\bSort.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\4_server-side\bSortClasses.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\4_server-side\fnCreatedCell.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\4_server-side\fnCreatedRow.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\4_server-side\fnDrawCallback.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\4_server-side\fnHeaderCallback.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\4_server-side\fnInitComplete.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\4_server-side\fnRowCallback.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\4_server-side\iDeferLoading.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\4_server-side\iDisplayLength.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\4_server-side\oLanguage.oPaginate.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\4_server-side\oLanguage.sInfo.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\4_server-side\oLanguage.sInfoEmpty.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\4_server-side\oLanguage.sInfoPostFix.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\4_server-side\oLanguage.sLengthMenu.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\4_server-side\oLanguage.sProcessing.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\4_server-side\oLanguage.sSearch.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\4_server-side\oLanguage.sUrl.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\4_server-side\oLanguage.sZeroRecords.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\4_server-side\oSearch.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\4_server-side\sAjaxDataProp.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\4_server-side\sAjaxSource.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\4_server-side\sDom.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\4_server-side\sPaginationType.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\4_server-side\_zero_config.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\5_ajax_objects\aaSorting.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\5_ajax_objects\aaSortingFixed.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\5_ajax_objects\aoColumns.bSearchable.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\5_ajax_objects\aoColumns.bSortable.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\5_ajax_objects\aoColumns.bUseRendered.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\5_ajax_objects\aoColumns.bVisible.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\5_ajax_objects\aoColumns.fnRender.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\5_ajax_objects\aoColumns.iDataSort.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\5_ajax_objects\aoColumns.sClass.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\5_ajax_objects\aoColumns.sName.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\5_ajax_objects\aoColumns.sTitle.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\5_ajax_objects\aoColumns.sWidth.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\5_ajax_objects\aoSearchCols.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\5_ajax_objects\asStripClasses.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\5_ajax_objects\bAutoWidth.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\5_ajax_objects\bFilter.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\5_ajax_objects\bInfo.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\5_ajax_objects\bLengthChange.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\5_ajax_objects\bPaginate.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\5_ajax_objects\bProcessing.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\5_ajax_objects\bServerSide.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\5_ajax_objects\bSort.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\5_ajax_objects\bSortClasses.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\5_ajax_objects\fnDrawCallback.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\5_ajax_objects\fnHeaderCallback.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\5_ajax_objects\fnInitComplete.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\5_ajax_objects\fnRowCallback.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\5_ajax_objects\fnServerData.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\5_ajax_objects\iDisplayLength.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\5_ajax_objects\oLanguage.oPaginate.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\5_ajax_objects\oLanguage.sInfo.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\5_ajax_objects\oLanguage.sInfoEmpty.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\5_ajax_objects\oLanguage.sInfoPostFix.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\5_ajax_objects\oLanguage.sLengthMenu.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\5_ajax_objects\oLanguage.sProcessing.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\5_ajax_objects\oLanguage.sSearch.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\5_ajax_objects\oLanguage.sUrl.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\5_ajax_objects\oLanguage.sZeroRecords.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\5_ajax_objects\oSearch.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\5_ajax_objects\sAjaxSource.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\5_ajax_objects\sDom.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\5_ajax_objects\sPaginationType.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\5_ajax_objects\_zero_config.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\5_ajax_objects\_zero_config_arrays_subobjects.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\5_ajax_objects\_zero_config_deep.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\5_ajax_objects\_zero_config_mDataProp.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\5_ajax_objects\_zero_config_null_source.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\5_ajax_objects\_zero_config_objects.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\5_ajax_objects\_zero_config_objects_subarrays.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\6_delayed_rendering\aaSorting.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\6_delayed_rendering\aaSortingFixed.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\6_delayed_rendering\aoColumns.bSearchable.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\6_delayed_rendering\aoColumns.bSortable.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\6_delayed_rendering\aoColumns.bUseRendered.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\6_delayed_rendering\aoColumns.bVisible.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\6_delayed_rendering\aoColumns.fnRender.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\6_delayed_rendering\aoColumns.iDataSort.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\6_delayed_rendering\aoColumns.sClass.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\6_delayed_rendering\aoColumns.sName.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\6_delayed_rendering\aoColumns.sTitle.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\6_delayed_rendering\aoColumns.sWidth.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\6_delayed_rendering\aoSearchCols.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\6_delayed_rendering\asStripClasses.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\6_delayed_rendering\bAutoWidth.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\6_delayed_rendering\bFilter.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\6_delayed_rendering\bInfo.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\6_delayed_rendering\bLengthChange.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\6_delayed_rendering\bPaginate.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\6_delayed_rendering\bProcessing.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\6_delayed_rendering\bServerSide.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\6_delayed_rendering\bSort.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\6_delayed_rendering\bSortClasses.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\6_delayed_rendering\fnDrawCallback.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\6_delayed_rendering\fnHeaderCallback.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\6_delayed_rendering\fnInitComplete.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\6_delayed_rendering\fnRowCallback.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\6_delayed_rendering\fnServerData.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\6_delayed_rendering\iDisplayLength.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\6_delayed_rendering\oLanguage.oPaginate.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\6_delayed_rendering\oLanguage.sInfo.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\6_delayed_rendering\oLanguage.sInfoEmpty.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\6_delayed_rendering\oLanguage.sInfoPostFix.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\6_delayed_rendering\oLanguage.sLengthMenu.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\6_delayed_rendering\oLanguage.sProcessing.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\6_delayed_rendering\oLanguage.sSearch.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\6_delayed_rendering\oLanguage.sUrl.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\6_delayed_rendering\oLanguage.sZeroRecords.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\6_delayed_rendering\oSearch.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\6_delayed_rendering\sAjaxDataProp.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\6_delayed_rendering\sAjaxDataProp2.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\6_delayed_rendering\sAjaxSource.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\6_delayed_rendering\sDom.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\6_delayed_rendering\sPaginationType.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\tests_onhold\6_delayed_rendering\_zero_config.js" />
+    <Content Include="Content\themes\gentelella\js\datatables\unit_testing\unit_test.js" />
+    <Content Include="Content\themes\gentelella\js\datepicker\daterangepicker.js" />
+    <Content Include="Content\themes\gentelella\js\dropzone\dropzone.js" />
+    <Content Include="Content\themes\gentelella\js\easypie\jquery.easypiechart.min.js" />
+    <Content Include="Content\themes\gentelella\js\echart\echarts-all.js" />
+    <Content Include="Content\themes\gentelella\js\echart\green.js" />
+    <Content Include="Content\themes\gentelella\js\editor\bootstrap-wysiwyg.js" />
+    <Content Include="Content\themes\gentelella\js\editor\external\google-code-prettify\lang-apollo.js" />
+    <Content Include="Content\themes\gentelella\js\editor\external\google-code-prettify\lang-basic.js" />
+    <Content Include="Content\themes\gentelella\js\editor\external\google-code-prettify\lang-clj.js" />
+    <Content Include="Content\themes\gentelella\js\editor\external\google-code-prettify\lang-css.js" />
+    <Content Include="Content\themes\gentelella\js\editor\external\google-code-prettify\lang-dart.js" />
+    <Content Include="Content\themes\gentelella\js\editor\external\google-code-prettify\lang-erlang.js" />
+    <Content Include="Content\themes\gentelella\js\editor\external\google-code-prettify\lang-go.js" />
+    <Content Include="Content\themes\gentelella\js\editor\external\google-code-prettify\lang-hs.js" />
+    <Content Include="Content\themes\gentelella\js\editor\external\google-code-prettify\lang-lisp.js" />
+    <Content Include="Content\themes\gentelella\js\editor\external\google-code-prettify\lang-llvm.js" />
+    <Content Include="Content\themes\gentelella\js\editor\external\google-code-prettify\lang-lua.js" />
+    <Content Include="Content\themes\gentelella\js\editor\external\google-code-prettify\lang-matlab.js" />
+    <Content Include="Content\themes\gentelella\js\editor\external\google-code-prettify\lang-ml.js" />
+    <Content Include="Content\themes\gentelella\js\editor\external\google-code-prettify\lang-mumps.js" />
+    <Content Include="Content\themes\gentelella\js\editor\external\google-code-prettify\lang-n.js" />
+    <Content Include="Content\themes\gentelella\js\editor\external\google-code-prettify\lang-pascal.js" />
+    <Content Include="Content\themes\gentelella\js\editor\external\google-code-prettify\lang-proto.js" />
+    <Content Include="Content\themes\gentelella\js\editor\external\google-code-prettify\lang-r.js" />
+    <Content Include="Content\themes\gentelella\js\editor\external\google-code-prettify\lang-rd.js" />
+    <Content Include="Content\themes\gentelella\js\editor\external\google-code-prettify\lang-scala.js" />
+    <Content Include="Content\themes\gentelella\js\editor\external\google-code-prettify\lang-sql.js" />
+    <Content Include="Content\themes\gentelella\js\editor\external\google-code-prettify\lang-tcl.js" />
+    <Content Include="Content\themes\gentelella\js\editor\external\google-code-prettify\lang-tex.js" />
+    <Content Include="Content\themes\gentelella\js\editor\external\google-code-prettify\lang-vb.js" />
+    <Content Include="Content\themes\gentelella\js\editor\external\google-code-prettify\lang-vhdl.js" />
+    <Content Include="Content\themes\gentelella\js\editor\external\google-code-prettify\lang-wiki.js" />
+    <Content Include="Content\themes\gentelella\js\editor\external\google-code-prettify\lang-xq.js" />
+    <Content Include="Content\themes\gentelella\js\editor\external\google-code-prettify\lang-yaml.js" />
+    <Content Include="Content\themes\gentelella\js\editor\external\google-code-prettify\prettify.js" />
+    <Content Include="Content\themes\gentelella\js\editor\external\google-code-prettify\run_prettify.js" />
+    <Content Include="Content\themes\gentelella\js\editor\external\jquery.hotkeys.js" />
+    <Content Include="Content\themes\gentelella\js\flot\curvedLines.js" />
+    <Content Include="Content\themes\gentelella\js\flot\date.js" />
+    <Content Include="Content\themes\gentelella\js\flot\jquery.flot.js" />
+    <Content Include="Content\themes\gentelella\js\flot\jquery.flot.orderBars.js" />
+    <Content Include="Content\themes\gentelella\js\flot\jquery.flot.pie.js" />
+    <Content Include="Content\themes\gentelella\js\flot\jquery.flot.resize.js" />
+    <Content Include="Content\themes\gentelella\js\flot\jquery.flot.spline.js" />
+    <Content Include="Content\themes\gentelella\js\flot\jquery.flot.stack.js" />
+    <Content Include="Content\themes\gentelella\js\flot\jquery.flot.time.min.js" />
+    <Content Include="Content\themes\gentelella\js\flot\jquery.flot.tooltip.min.js" />
+    <Content Include="Content\themes\gentelella\js\gauge\gauge.min.js" />
+    <Content Include="Content\themes\gentelella\js\gauge\gauge_demo.js" />
+    <Content Include="Content\themes\gentelella\js\icheck\icheck.min.js" />
+    <Content Include="Content\themes\gentelella\js\input_mask\jquery.inputmask.js" />
+    <Content Include="Content\themes\gentelella\js\ion_range\ion.rangeSlider.min.js" />
+    <Content Include="Content\themes\gentelella\js\jquery.min.js" />
+    <Content Include="Content\themes\gentelella\js\knob\jquery.knob.min.js" />
+    <Content Include="Content\themes\gentelella\js\maps\gdp-data.js" />
+    <Content Include="Content\themes\gentelella\js\maps\jquery-jvectormap-2.0.1.min.js" />
+    <Content Include="Content\themes\gentelella\js\maps\jquery-jvectormap-us-aea-en.js" />
+    <Content Include="Content\themes\gentelella\js\maps\jquery-jvectormap-world-mill-en.js" />
+    <Content Include="Content\themes\gentelella\js\moment.min.js" />
+    <Content Include="Content\themes\gentelella\js\moment.min2.js" />
+    <Content Include="Content\themes\gentelella\js\moris\example.js" />
+    <Content Include="Content\themes\gentelella\js\moris\jquery.min.js" />
+    <Content Include="Content\themes\gentelella\js\moris\morris.js" />
+    <Content Include="Content\themes\gentelella\js\moris\morris.min.js" />
+    <Content Include="Content\themes\gentelella\js\moris\raphael-min.js" />
+    <Content Include="Content\themes\gentelella\js\nicescroll\jquery.nicescroll.min.js" />
+    <Content Include="Content\themes\gentelella\js\notify\pnotify.buttons.js" />
+    <Content Include="Content\themes\gentelella\js\notify\pnotify.core.js" />
+    <Content Include="Content\themes\gentelella\js\notify\pnotify.nonblock.js" />
+    <Content Include="Content\themes\gentelella\js\nprogress.js" />
+    <Content Include="Content\themes\gentelella\js\parsley\parsley.min.js" />
+    <Content Include="Content\themes\gentelella\js\progressbar\bootstrap-progressbar.min.js" />
+    <Content Include="Content\themes\gentelella\js\select\select2.full.js" />
+    <Content Include="Content\themes\gentelella\js\sidebar\classie.js" />
+    <Content Include="Content\themes\gentelella\js\sidebar\component.css" />
+    <Content Include="Content\themes\gentelella\js\sidebar\modernizr.custom.js" />
+    <Content Include="Content\themes\gentelella\js\sidebar\sidebarEffects.js" />
+    <Content Include="Content\themes\gentelella\js\skycons\skycons.js" />
+    <Content Include="Content\themes\gentelella\js\sparkline\jquery.sparkline.min.js" />
+    <Content Include="Content\themes\gentelella\js\switchery\switchery.min.js" />
+    <Content Include="Content\themes\gentelella\js\tags\jquery.tagsinput.min.js" />
+    <Content Include="Content\themes\gentelella\js\textarea\autosize.min.js" />
+    <Content Include="Content\themes\gentelella\js\validator\validator.js" />
+    <Content Include="Content\themes\gentelella\js\wizard\jquery.smartWizard.js" />
+    <Content Include="Content\themes\gentelella\less\custom.css" />
+    <Content Include="Content\themes\gentelella\personalizado\img\icon-user.png" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Content\themes\gentelella\css\datatables\images\Sorting icons.psd" />
+    <Content Include="Content\themes\gentelella\fonts\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\themes\gentelella\fonts\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\themes\gentelella\fonts\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\themes\gentelella\fonts\fonts\FontAwesome.otf" />
+    <Content Include="Content\themes\gentelella\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\themes\gentelella\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\themes\gentelella\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\themes\gentelella\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Content\themes\gentelella\fonts\less\bordered-pulled.less" />
+    <Content Include="Content\themes\gentelella\fonts\less\core.less" />
+    <Content Include="Content\themes\gentelella\fonts\less\fixed-width.less" />
+    <Content Include="Content\themes\gentelella\fonts\less\font-awesome.less" />
+    <Content Include="Content\themes\gentelella\fonts\less\icons.less" />
+    <Content Include="Content\themes\gentelella\fonts\less\larger.less" />
+    <Content Include="Content\themes\gentelella\fonts\less\list.less" />
+    <Content Include="Content\themes\gentelella\fonts\less\mixins.less" />
+    <Content Include="Content\themes\gentelella\fonts\less\path.less" />
+    <Content Include="Content\themes\gentelella\fonts\less\rotated-flipped.less" />
+    <Content Include="Content\themes\gentelella\fonts\less\spinning.less" />
+    <Content Include="Content\themes\gentelella\fonts\less\stacked.less" />
+    <Content Include="Content\themes\gentelella\fonts\less\variables.less" />
+    <Content Include="Content\themes\gentelella\fonts\scss\font-awesome.scss" />
+    <Content Include="Content\themes\gentelella\fonts\scss\_bordered-pulled.scss" />
+    <Content Include="Content\themes\gentelella\fonts\scss\_core.scss" />
+    <Content Include="Content\themes\gentelella\fonts\scss\_fixed-width.scss" />
+    <Content Include="Content\themes\gentelella\fonts\scss\_icons.scss" />
+    <Content Include="Content\themes\gentelella\fonts\scss\_larger.scss" />
+    <Content Include="Content\themes\gentelella\fonts\scss\_list.scss" />
+    <Content Include="Content\themes\gentelella\fonts\scss\_mixins.scss" />
+    <Content Include="Content\themes\gentelella\fonts\scss\_path.scss" />
+    <Content Include="Content\themes\gentelella\fonts\scss\_rotated-flipped.scss" />
+    <Content Include="Content\themes\gentelella\fonts\scss\_spinning.scss" />
+    <Content Include="Content\themes\gentelella\fonts\scss\_stacked.scss" />
+    <Content Include="Content\themes\gentelella\fonts\scss\_variables.scss" />
+    <Content Include="Content\themes\gentelella\images\Sorting icons.psd" />
+    <Content Include="Content\themes\gentelella\js\datatables\images\Sorting icons.psd" />
+    <Content Include="Content\themes\gentelella\js\datatables\tools\.gitignore" />
+    <Content Include="Content\themes\gentelella\js\datatables\tools\as3\lib\AlivePDF.swc" />
+    <Content Include="Content\themes\gentelella\js\datatables\tools\as3\ZeroClipboard.as" />
+    <Content Include="Content\themes\gentelella\js\datatables\tools\as3\ZeroClipboardPdf.as" />
+    <Content Include="Content\themes\gentelella\js\datatables\tools\bower.json" />
+    <Content Include="Content\themes\gentelella\js\datatables\tools\images\psd\collection.psd" />
+    <Content Include="Content\themes\gentelella\js\datatables\tools\images\psd\copy document.psd" />
+    <Content Include="Content\themes\gentelella\js\datatables\tools\images\psd\file_types.psd" />
+    <Content Include="Content\themes\gentelella\js\datatables\tools\images\psd\printer.psd" />
+    <Content Include="Content\themes\gentelella\js\datatables\tools\make.sh" />
+    <Content Include="Content\themes\gentelella\js\datatables\tools\TableTools-master\.gitignore" />
+    <Content Include="Content\themes\gentelella\js\datatables\tools\TableTools-master\as3\lib\AlivePDF.swc" />
+    <Content Include="Content\themes\gentelella\js\datatables\tools\TableTools-master\as3\ZeroClipboard.as" />
+    <Content Include="Content\themes\gentelella\js\datatables\tools\TableTools-master\as3\ZeroClipboardPdf.as" />
+    <Content Include="Content\themes\gentelella\js\datatables\tools\TableTools-master\bower.json" />
+    <Content Include="Content\themes\gentelella\js\datatables\tools\TableTools-master\images\psd\collection.psd" />
+    <Content Include="Content\themes\gentelella\js\datatables\tools\TableTools-master\images\psd\copy document.psd" />
+    <Content Include="Content\themes\gentelella\js\datatables\tools\TableTools-master\images\psd\file_types.psd" />
+    <Content Include="Content\themes\gentelella\js\datatables\tools\TableTools-master\images\psd\printer.psd" />
+    <Content Include="Content\themes\gentelella\js\datatables\tools\TableTools-master\make.sh" />
+    <Content Include="Content\themes\gentelella\js\maps\us-unemployment.json" />
+    <Content Include="feedviewerDataSet.xsc">
+      <DependentUpon>feedviewerDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="Controllers\dsPersonalizado.xsc">
+      <DependentUpon>dsPersonalizado.xsd</DependentUpon>
+    </Content>
+    <None Include="Controllers\dsPersonalizado.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsPersonalizado.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Controllers\dsPersonalizado.xss">
+      <DependentUpon>dsPersonalizado.xsd</DependentUpon>
+    </Content>
+    <None Include="feedviewerDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>feedviewerDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="feedviewerDataSet.xss">
+      <DependentUpon>feedviewerDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="feedviewerDs.xsc">
+      <DependentUpon>feedviewerDs.xsd</DependentUpon>
+    </Content>
+    <None Include="feedviewerDs.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>feedviewerDs.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="feedviewerDs.xss">
+      <DependentUpon>feedviewerDs.xsd</DependentUpon>
+    </Content>
+    <None Include="Properties\PublishProfiles\FeedViewer.pubxml" />
+    <None Include="Scripts\jquery-1.8.2.intellisense.js" />
+    <Content Include="Scripts\jquery-1.8.2.js" />
+    <Content Include="Scripts\jquery-1.8.2.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-ui-1.8.24.js" />
+    <Content Include="Scripts\jquery-ui-1.8.24.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\knockout-2.2.0.debug.js" />
+    <Content Include="Scripts\knockout-2.2.0.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\_references.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\RSSFeed\Index.cshtml" />
+    <Content Include="Views\RSSFeed\Cadastro.cshtml" />
+    <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="EspereLogout.html" />
+    <Content Include="Views\Login\Logout.cshtml" />
+    <Content Include="Views\Login\EspereLogout.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\MostraSimNao.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\MostraSimNao.cshtml" />
+    <None Include="Views\Shared\_LayoutAdmin.cshtml" />
+    <Content Include="Views\Usuario\Index.cshtml" />
+    <Content Include="Views\Usuario\Cadastro.cshtml" />
+    <Content Include="Views\Shared\_LayoutLogin.cshtml" />
+    <Content Include="Views\Teste\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Models\CustomAnnotations\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controllers\Relatorio_RSSFeed.rdlc" />
+    <EmbeddedResource Include="ModeloRelatorio.rdlc" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:10015/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

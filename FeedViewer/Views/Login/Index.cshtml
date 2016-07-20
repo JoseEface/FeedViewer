@@ -1,0 +1,46 @@
+﻿@{
+    ViewBag.Title = "FeedViewer - Login";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+
+@model FeedViewer.Models.LoginUsuario
+
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+    @Html.AntiForgeryToken()
+    <h1>Entrar no FeedViewer</h1>
+    <div>
+        @Html.TextBoxFor(model => model.meulogin, new { placeholder="Login", @class="form-control" })
+        @Html.ValidationMessageFor(model => model.meulogin, null, new { style = "color: red !important;" })
+    </div>
+    <br />
+    <div>
+        @Html.PasswordFor(model => model.senha, new { placeholder="Senha", @class="form-control"})        
+        @Html.ValidationMessageFor(model => model.senha, null, new { style = "color: red !important;" })
+    </div>
+    <br />
+    <div>
+        <div style="clear: both; width: 100%; color: red; margin-bottom: 5px;">
+             @Html.ValidationMessage("erroExtra")
+        </div>
+        <input type="submit" class="btn btn-default submit" value="Entrar" />
+        <!-- <a class="reset_pass" href="#">Lost your password?</a> -->
+    </div>
+    <div class="clearfix"></div>
+    <div class="separator">
+
+        <!--<p class="change_link">New to site?
+                                <a href="#toregister" class="to_register"> Create Account </a>
+                            </p>-->
+        <div class="clearfix"></div>
+        <br />
+        <div>
+            <h1><i class="fa fa-newspaper-o"></i> FeedViewer</h1>
+
+            <p>©2016 Todos os direitos reservados. FeedViewer.</p>
+        </div>
+    </div>
+}
+
