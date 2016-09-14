@@ -1,0 +1,78 @@
+﻿@model FeedViewer.Models.LoginUsuario
+
+
+<div id="lala">
+    
+    @DateTime.Now.ToLongTimeString()
+
+    @using (Ajax.BeginForm("LoginTesta", "Login", new AjaxOptions { HttpMethod = "Post", OnSuccess = "sucesso", OnFailure = "falha", OnBegin = "iniciando"}, new { id = "lalaform" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        <h1>Entrar no FeedViewer</h1>
+
+        <div>            
+            @Html.TextBoxFor(model => model.meulogin, new { placeholder = "Login", @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.meulogin, null, new { style = "color: red !important;" })    
+        </div>
+        
+        <br />
+        <div>
+            @Html.PasswordFor(model => model.senha, new { placeholder = "Senha", @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.senha, null, new { style = "color: red !important;" })
+        </div>
+        <br />
+        <div>
+            <div style="clear: both; width: 100%; color: red; margin-bottom: 5px;" id="erroExtra">
+                
+                
+            </div>
+            <input type="submit" class="btn btn-default submit" value="Entrar" id="envform" />
+            <!-- <a class="reset_pass" href="#">Lost your password?</a> -->
+        </div>
+        <div>
+            <br />
+            <a href="javascript:void(0)" id="esqueceu" style="clear: both; width: 100%;">Esqueceu a senha ?</a>
+        </div>
+        <div class="clearfix"></div>
+        <div class="separator">
+
+            <!--<p class="change_link">New to site?
+                                    <a href="#toregister" class="to_register"> Create Account </a>
+                                </p>-->
+            <div class="clearfix"></div>
+            <br />
+            <div>
+                <h1><i class="fa fa-newspaper-o"></i> FeedViewer</h1>
+                <p>©2016 Todos os direitos reservados. FeedViewer.</p>
+            </div>
+        </div>
+
+    }
+    
+</div>
+
+<script type="text/javascript">
+
+    function iniciando() {
+        
+       // $("#envform").val()($("#envform").val() + " <i class=\"fa fa-spinner fa-spin\"></i>");
+        
+        //$("#envform").html("Acessando...");
+        $("#envform").addClass("disabled");
+    }
+
+    function sucesso(dados) {
+        $("#envform").removeClass("disabled");
+        $("#envform").blur();
+        (dados.Sucesso) ? /*location.href=dados.Mensagem*/location.reload() : $("#erroExtra").html(dados.Mensagem);        
+    }
+
+    function falha(parametros) {
+        $("#envform").removeClass("disabled");
+        alert("O servidor não respondeu corretamente. Por favor, tente mais tarde.")
+        if(typeof console !== 'undefined')
+          console.log(parametros);
+    }
+
+</script>

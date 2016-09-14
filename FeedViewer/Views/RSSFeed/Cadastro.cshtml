@@ -1,0 +1,425 @@
+﻿@{
+    ViewBag.Title = "Cadastro de RSS";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@model FeedViewer.Models.feedrss
+@using FeedViewer.Models
+
+@section AreaHead
+{
+    <link rel="stylesheet" href="@Url.Content("~/Content/themes/gentelella/css/datatables/tools/css/dataTables.tableTools.css")" />
+    <style>
+        .erroMsg {
+            color: red;
+            width: 100%;
+            clear: both;
+        }
+    </style>
+
+}
+
+
+@section AreaConteudo 
+{
+
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>RSS Feed <small>dados do rss</small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+
+
+                    <form id="rssform" class="form-horizontal form-label-left">
+                        @Html.AntiForgeryToken()
+                        <!-- Input hidden bloqueia reset - para evitar ter que tratar cada campo em js, use css -->
+                        <input type="text" name="id" id="id" value="0" style="display:none;" />
+                        <input type="text" name="donoid" id="donoid" value="0" style="display:none;" />
+
+                        <div class="form-group" id="fgnomefeed">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nomefeed">
+                                Nome descrição <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" id="nomefeed" name="nomefeed" required="required" class="form-control col-md-7 col-xs-12" maxlength="256">
+                                <div id="vnomefeed" class="erroMsg"></div>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group" id="fgcaminhorss">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="caminhorss">
+                                URL do RSS <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="url" id="caminhorss" name="caminhorss" required="required" class="form-control col-md-7 col-xs-12">
+                                <div id="vcaminhorss" class="erroMsg"></div>
+                            </div>
+                        </div>
+
+                        <div class="ln_solid"></div>
+                        <div class="form-group">
+                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                <button type="reset" id="btncancelar" class="btn btn-primary">Cancelar</button>
+                                <button type="button" id="btnremover" class="btn btn-warning">Remover</button>
+                                <button type="button" id="btngravar" class="btn btn-success">Gravar</button>
+                            </div>
+                        </div>
+
+                    </form>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Busca <small>buscar feed</small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+
+                    <h4>Buscar por:</h4>
+                    <div class="ln_solid"></div>
+
+                    <!-- data-parsley-validate -->
+                    <form id="formbuscarss" class="form-horizontal form-label-left">
+
+                        <div class="form-group" id="fgrssbusca">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="rssbusca">
+                                Nome RSS <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" id="rssbusca" name="rssbusca" required="required" class="form-control col-md-7 col-xs-12" maxlength="256">
+                                <div id="vrssbusca" class="erroMsg"></div>
+                            </div>
+                        </div>
+
+                        <div class="ln_solid"></div>
+                        <div class="form-group">
+                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                <button type="reset" id="btncancelarbusca" class="btn btn-primary">Cancelar</button>
+                                <button type="button" id="btnbuscar" class="btn btn-success">Buscar</button>
+                            </div>
+                        </div>
+                        <div class="ln_solid"></div>
+                    </form>
+
+                    <h4>Resultados da busca:</h4>
+                    <div class="ln_solid"></div>
+
+                    <table id="listaRSS" class="table table-striped responsive-utilities jambo_table">
+                        <thead>
+                            <tr>
+                                <th>RSS</th>
+                                <th>Nome</th>
+                                <th>URL</th>
+                                <th>Dono</th>
+                                <th>Usando</th>
+                            </tr>
+                        </thead>
+                        <tbody id="idcorpotabela">
+                        </tbody>
+                    </table>
+                    <br />
+                    <br />
+                    <div class="ln_solid"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+
+
+
+}
+
+@section AreaScript
+{
+    <script src="@Url.Content("~/Content/themes/gentelella/js/datatables/js/jquery.dataTables.js")"></script>
+    <script src="@Url.Content("~/Content/themes/gentelella/js/datatables/tools/js/dataTables.tableTools.js")"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.14.0/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.14.0/additional-methods.min.js"></script>
+    <script type="text/javascript">
+
+        //var idUsuariologado = "@*{ Write((Session["UsuarioLogado"] as LoginInfo).Usuario.id); }*@";
+
+        function carregue(id) {
+            $.ajax({
+                type: "post",
+                dataType: "json",
+                data: { "id": id },
+                url: "@Url.Action("CarregaRSS", "RSSFeed")",
+                    success: function (dados) {
+                        if (dados.hasOwnProperty('nome')) {
+                            $("#btncancelar").click();
+                            $("#id").val(dados.id);
+                            $("#donoid").val(dados.iddono);
+                            $("#nomefeed").val(dados.nome);
+                            $("#caminhorss").val(dados.caminhofeed);
+                            $("#btnremover").show();
+                            $('html, body').animate({
+                                scrollTop: $("body").offset().top
+                            }, 1000);
+                        }
+                        else {
+                            console.log(dados);
+                            alert("Erro: Retorno do servidor é inválido");
+                        }
+                    },
+                    error: function (req, msg, erro) {
+                        console.log(req);
+                        console.log(erro);
+                        console.log(msg);
+                        alert("erro na requisicao");
+                    }
+
+                });
+            }
+
+
+        $(document).ready(function () {
+
+            var tabela;
+
+            function desenhaTabela() {
+
+                tabela = $("#listaRSS").dataTable({
+                    "sPaginationType": "full_numbers",
+                    "bDestroy": true,
+                    "bAutoWidth": false,
+                    "language":
+                        {
+                            "sEmptyTable": "Nenhum registro encontrado",
+                            "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+                            "sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
+                            "sInfoFiltered": "(Filtrados de _MAX_ registros)",
+                            "sInfoPostFix": "",
+                            "sInfoThousands": ".",
+                            "sLengthMenu": "Mostrando _MENU_ resultados por página",
+                            "sLoadingRecords": "Carregando...",
+                            "sProcessing": "Processando...",
+                            "sZeroRecords": "Nenhum registro encontrado",
+                            "sSearch": "Pesquisar",
+                            "oPaginate": {
+                                "sNext": "Próximo",
+                                "sPrevious": "Anterior",
+                                "sFirst": "Primeiro",
+                                "sLast": "Último"
+                            },
+                            "oAria": {
+                                "sSortAscending": ": Ordenar colunas de forma ascendente",
+                                "sSortDescending": ": Ordenar colunas de forma descendente"
+                            }
+                        },
+                    "tableTools": {
+                        "sSwfPath": ""
+                    }
+                });
+                
+            }
+
+            desenhaTabela();
+
+            $("#btnremover").hide();
+
+            validador = $("#rssform").validate({
+                rules: {
+                    nomefeed: {
+                        required: true
+                    },
+                    caminhorss: {
+                        required: true,
+                        url: true
+                    }
+
+                },
+                errorPlacement: function (erro, elemento) {
+                    $("#v" + $(elemento).attr("id")).html($(erro).html());
+                    $("#fg" + $(elemento).attr("id")).addClass("has-error");
+                },
+                success: function (label) {
+                    var rotulo = $(label).attr("id").replace("-error", "");
+                    $("#v" + rotulo).html("");
+                    $("#fg" + rotulo).removeClass("has-error");
+                },
+                messages: {
+                    nomefeed: {
+                        required: "Campo obrigatório"
+                    },
+                    caminhorss: {
+                        required: "Campo obrigatório",
+                        url: "Entre com uma URL válida"
+                    }
+                }
+            });
+
+            validadorbusca = $("#formbuscarss").validate({
+                rules: {
+                    rssbusca: {
+                        required: true
+                    }
+                },
+                errorPlacement: function (erro, elemento) {
+                    $("#v" + $(elemento).attr("id")).html($(erro).html());
+                    $("#fg" + $(elemento).attr("id")).addClass("has-error");
+                },
+                success: function (label) {
+                    var rotulo = $(label).attr("id").replace("-error", "");
+                    $("#v" + rotulo).html("");
+                    $("#fg" + rotulo).removeClass("has-error");
+                },
+                messages: {
+                    rssbusca: {
+                        required: "Campo obrigatório"
+                    }
+                }
+            });
+
+
+            $("#btncancelar").click(function () {
+                $("#rssform div.form-group").removeClass("has-error");
+                $("#rssform div.erroMsg").html("");
+                $("#btnremover").hide();
+
+                validador.resetForm();
+
+            });
+
+            $("#btnremover").click(function (e) {
+                e.preventDefault();
+                if (confirm("Tem certeza ?")) {
+                    $.ajax({
+                        type: "post",
+                        url: "@Url.Action("Remover","RSSFeed")",
+                        dataType: "json",
+                        data: { "id": $("#id").val() },
+                        success: function (dados) {
+                            if (dados.Sucesso) {
+                                alert("Removido com sucesso !");
+                                $("#btncancelar").click();
+                                tabela.fnClearTable();
+                                desenhaTabela();
+                            }
+                            else {
+                                if(typeof console != "undefined")
+                                    console.log(dados);
+                                alert("Falha na remção");
+                            }
+                        },
+                        error: function (req, erro, msg) {
+                            alert("Falha na requisicao");
+                            if (typeof console != "undefined") {
+                                console.log(req);
+                                console.log(erro);
+                                console.log(msg);
+                            }
+                        }
+                    });
+                }
+            });
+
+            $("#btngravar").click(function (e) {
+                e.preventDefault();
+                if ($("#rssform").valid()) {
+                    //if ($("#donoid").val() == 0)
+                        //$("#donoid").val(idUsuariologado);
+                    $.ajax({
+                        type: "post",
+                        dataType: "json",
+                        url: "@Url.Action("GravarCadastro","RSSFeed")",
+                        data: $("#rssform").serialize(),
+                        success: function (dados) {
+                            if(typeof console != "undefined")
+                                console.log(dados);
+                            if (dados.Sucesso) {
+                                alert("Sucesso ao atualizar registro");
+                                $("#btncancelar").click();
+                                tabela.fnClearTable();
+                                desenhaTabela();
+                            }
+                            else
+                                alert("Erro ao atualizar registro");
+                        },
+                        error: function (req, erro, msg) {
+                            alert("Falha na solicitação ");
+                            console.log(req);
+                            console.log(erro);
+                            console.log(msg);
+                        }
+                    });
+                }
+                else
+                    alert("Nao valido");
+
+            });
+
+            $("#btnbuscar").click(function (e) {
+                e.preventDefault();
+                //alert("aqui " + $("#formbuscausuario").valid());
+                if ($("#formbuscarss").valid()) {
+
+                    $.ajax({
+                        type: "post",
+                        dataType: "json",
+                        data: $("#formbuscarss").serialize(),
+                        url: "@Url.Action("BuscaRSS","RSSFeed")",
+                        success: function (dados) {
+                            if (dados.constructor == Array) {
+                                var novalinha = "";
+                                tabela.fnClearTable();
+                                for (var x = 0; x < dados.length; x++) {
+                                    novalinha = "<tr> <td> <a href=\"javascript:carregue(" + dados[x].id + ")\"> <img src=\"http://www.google.com/s2/favicons?domain_url=" + dados[x].caminhofeed + "\" style=\"margin: 0; padding: 0; width: 20px;\" > </img> </a> </td> \
+                                                      <td> <a href=\"javascript:carregue(" + dados[x].id + ")\">" + dados[x].nome + "</a> </td>\
+                                                      <td> <a href=\"javascript:carregue(" + dados[x].id + ")\">" + dados[x].caminhofeed + "</a> </td>\
+                                                      <td> <a href=\"javascript:carregue(" + dados[x].id + ")\">" + dados[x].usrDono + "</a> </td>\
+                                                      <td> <a href=\"javascript:carregue(" + dados[x].id + ")\">" + dados[x].usando + "</a> </td></tr>";
+                                    $("#idcorpotabela").append(novalinha);
+                                }
+                                desenhaTabela();
+                                if (dados.length == 0)
+                                    alert("Nenhum registro encontrado");
+                            }
+                            else {
+                                console.log(dados);
+                                alert("Erro no retorno");
+                            }
+                        },
+                        error: function (req, erro, msg) {
+                            alert("Falha na solicitação da busca !");
+                            console.log(req);
+                            console.log(erro);
+                            console.log(msg);
+                        }
+                    });
+                }
+                else
+                    alert("Por favor, verifique por erros nos campos do formulário.");
+            });
+
+            $("#btncancelarbusca").click(function () {
+                $("#formbuscarss div.form-group").removeClass("has-error");
+                $("#formbuscarss div.erroMsg").html("");
+                validadorbusca.resetForm();
+            });
+
+
+        });
+
+    </script>
+}

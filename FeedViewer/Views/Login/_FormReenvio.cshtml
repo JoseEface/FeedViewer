@@ -1,0 +1,89 @@
+﻿@{
+    Layout = null;
+}
+
+@model FeedViewer.Models.RecoverPassword
+
+<div id="dialogo" title="E-mail enviado" style="display: none;">
+    E-mail enviado
+</div>
+
+
+
+@using (Ajax.BeginForm("LoginRecupera","Login",new AjaxOptions { OnSuccess = "recuperadoSucesso", OnFailure = "falhaRequisicao", OnBegin="iniciandoRecuperacao", HttpMethod = "Post" },new { @class = "renvForm", id = "formReenvio"}))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <h1>Entrar no FeedViewer</h1>
+    <a href="javascript:void(0)" id="retornar" style="font-weight: bold; text-decoration: underline;">Retornar para o login</a>
+    <br /><br />
+    <p>Digite seu e-mail para envio da nova senha:</p>
+    <div>
+        @Html.TextBoxFor(model => model.email, new {  @class="form-control", placeholder="E-mail"})
+        <span id="vcampoemail" style="color:red;">
+            @Html.ValidationMessageFor(model => model.email)
+        </span>
+    </div>
+    <br />
+    <div>
+        <div style="clear: both; width: 100%; color: red; margin-bottom: 5px;" id="infoExtra">
+        </div>
+        <input type="submit" class="btn btn-default submit" value="Enviar" id="EmailEnvia" />
+        <!-- <a class="reset_pass" href="#">Lost your password?</a> -->
+    </div>
+    <div class="clearfix"></div>
+    <div class="separator">
+        <!--<p class="change_link">New to site?
+                                <a href="#toregister" class="to_register"> Create Account </a>
+                            </p>-->
+        <div class="clearfix"></div>
+        <br />
+        <div>
+            <h1><i class="fa fa-newspaper-o"></i> FeedViewer</h1>
+            <p>©2016 Todos os direitos reservados. FeedViewer.</p>
+        </div>
+    </div>
+
+}
+
+
+<script>
+
+    function iniciandoRecuperacao() {
+        $("#EmailEnvia").addClass("disabled");
+        $("#infoExtra").html("");
+    }
+
+    function recuperadoSucesso(dados) {
+        $("#EmailEnvia").removeClass("disabled");
+        $("#EmailEnvia").blur();
+        if (dados.Sucesso) {
+            //alert("Sucesso");
+            //$("#infoExtra").html("Enviada senha genérica para o e-mail especificado.");
+            $("#dialogo").html("Enviada senha genérica para o e-mail especificado.");
+            $("#dialogo").dialog({
+                modal: true,
+                width: 300,
+                height: "auto",
+                buttons: {
+                    "OK": function () {
+                        $(this).dialog("close");
+                    }
+                }
+            });
+            $("#retornar").click();
+        }
+        else {
+            $("#infoExtra").html(dados.Mensagem);            
+            //alert("aqui");
+        }
+    }
+
+    function falhaRequisicao(parametros) {
+        $("#EmailEnvia").removeClass("disabled");
+        alert("Falha na requisição ao servidor. Tente mais tarde.");
+        if (typeof console !== "undefined")
+            console.log(parametros);
+    }
+
+</script>

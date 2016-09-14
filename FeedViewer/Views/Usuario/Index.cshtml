@@ -1,0 +1,237 @@
+﻿@{
+    ViewBag.Title = "Minha Conta";
+
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    
+}
+@model FeedViewer.Models.usuario
+
+@section AreaHead {
+    <style>
+
+        .erroMsg {
+            color: red;
+            width: 100%;
+            clear: both;
+        }
+
+    </style>
+}
+
+
+@section AreaConteudo 
+{
+
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Minha conta <small>dados da sua conta</small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+
+
+                    <form id="formMinhaConta" class="form-horizontal form-label-left">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="id" id="id" value="@Model.id" />
+
+                        <div class="form-group" id="fgnome">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nome">
+                                Nome <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" id="nome" name="nome" class="form-control col-md-7 col-xs-12" value="@Model.nome"/>                                
+                                <div id="vnome" class="erroMsg"></div>
+                            </div>
+                            
+                        </div>
+
+                        <div class="form-group" id="fgusremail">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">
+                                E-mail <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12 has-feedback">
+                                <input type="email" id="usremail" name="usremail" class="form-control col-md-7 col-xs-12 has-feedback-left" value="@Model.email" />
+                                <span class="fa fa-envelope form-control-feedback left" aria-hidden="true"></span>
+                                <div id="vusremail" class="erroMsg"></div>
+                            </div>                            
+                        </div>
+
+                        <div class="form-group" id="fgcontalogin">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="contalogin">
+                                Login <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" id="contalogin" name="contalogin" class="form-control col-md-7 col-xs-12" value="@Model.login" />
+                                <div id="vcontalogin" class="erroMsg"></div>
+                            </div>                            
+                        </div>
+
+
+                        <div class="form-group" id="fgsenha">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="senha">
+                                Senha 
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="password" id="senha" name="senha" class="form-control col-md-7 col-xs-12">
+                                <div id="vsenha" class="erroMsg"></div>
+                            </div>
+                        </div>
+
+                        <div class="form-group" id="fgsenhaconfirma">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="senhaconfirmma">
+                                Senha (confirma)
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="password" id="senhaconfirma" name="senhaconfirma" class="form-control col-md-7 col-xs-12">
+                                <div id="vsenhaconfirma" class="erroMsg"></div>
+                            </div>                            
+                        </div>
+
+
+                        <div class="ln_solid"></div>
+                        <div class="form-group">
+                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                <button type="reset" id="btncancelar" class="btn btn-primary">Cancelar</button>
+                                <button type="button" id="btngravar" class="btn btn-success">Gravar</button>
+                            </div>
+                        </div>
+
+                    </form>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+}
+
+@section AreaScript
+{
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.14.0/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.14.0/additional-methods.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            var loginOriginal = "@Model.login";
+
+            $.validator.addMethod("loginUnico", function (valor, elemento) {
+                var resultado = true; //e valido
+                if (loginOriginal != valor) {
+                    $.ajax({
+                        type: "post",
+                        dataType: "json",
+                        data: { "login": valor },
+                        url: "@Url.Action("LoginUnico","Usuario")",
+                        success: function (dados) {
+                            if (!dados.Sucesso)
+                                resultado = false;
+                        },
+                        error: function (req,erro,msg) {
+                            alert("Falha na validacao de logins");
+                            resultado = false;
+                            console.log(req);
+                            console.log(erro);
+                            console.log(msg);
+                        },
+                        async: false
+                    });
+                }
+                return resultado;
+            });
+            
+            validador = $("#formMinhaConta").validate({
+                rules: {
+                    nome: {
+                        required: true
+                    },
+                    usremail: {
+                        required: true,
+                        email: true
+                    },
+                    contalogin: {
+                        required: true,
+                        loginUnico: true
+                    },
+                    senhaconfirma: {
+                        equalTo: "#senha"
+                    }
+
+                },
+                errorPlacement: function (erro, elemento) {
+                    $("#v" + $(elemento).attr("id")).html($(erro).html());
+                    $("#fg" + $(elemento).attr("id")).addClass("has-error");
+                },
+                success: function (label) {
+                    var rotulo = $(label).attr("id").replace("-error", "");
+                    $("#v" + rotulo).html("");
+                    $("#fg" + rotulo).removeClass("has-error");
+                },
+                messages: {
+                    nome: {
+                        required: "Campo obrigatório"
+                    },
+                    contalogin: {
+                        required: "Campo obrigatório",
+                        loginUnico: "Esse login já existe !"
+                    },
+                    usremail: {
+                        email: "Digite um e-mail válido"
+                    },
+                    senhaconfirma: {
+                        equalTo: "Senhas digitadas não são iguais"
+                    }
+                }
+            });
+
+            $("#btngravar").click(function (e) {
+                e.preventDefault();                
+                if ($("#formMinhaConta").valid()) {
+                    
+                    $.ajax({
+                        type: "post",
+                        dataType: "json",
+                        url: "@Url.Action("Gravar","Usuario")",
+                        data: $("#formMinhaConta").serialize(),
+                        success: function (dados) {
+                            console.log(dados);                            
+                            if (dados.Sucesso) {
+                                alert("Sucesso ao atualizar registro");
+                                location.reload();
+                            }
+                            else
+                                alert("Erro ao atualizar registro");
+                        },
+                        error: function (req, erro, msg) {
+                            alert("Falha na solicitação ");
+                            console.log(req);
+                            console.log(erro);
+                            console.log(msg);
+                        }
+                    });
+                    
+                }
+                else
+                    alert("Nao valido");
+                    
+            });
+
+            $("#btncancelar").click(function (e) {
+                validador.resetForm();
+                $("div.erroMsg").html("");
+                $("div.form-group").removeClass("has-error");
+            });
+            
+        });
+
+    </script>
+
+}

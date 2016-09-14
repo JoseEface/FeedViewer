@@ -1,0 +1,51 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+    
+}
+
+@model FeedViewer.Models.LoginOrRecover
+
+@section AreaHead {
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" />
+    <style>
+
+        #envform:focus {
+             outline: none;
+        }
+
+        .renvForm {
+            display: none;
+        }
+
+    </style>
+
+}
+    
+    <div>
+    @Html.Partial("_FormLogin", Model.loginUsr)    
+    @Html.Partial("_FormReenvio",Model.recPasswd)       
+    </div>
+
+
+@section AreaScript {
+    <script>
+
+        $(document).ready(function () {
+
+            $("#esqueceu").click(function (elemento) {               
+                $("#lalaform").hide();
+                $("#formReenvio").fadeIn();
+            });
+
+            $("#retornar").click(function (elemento) {
+                elemento.preventDefault();
+                $("#formReenvio").hide();
+                $("#lalaform").fadeIn();                
+            })
+
+        });
+
+
+    </script>
+
+}

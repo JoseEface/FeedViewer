@@ -1,0 +1,128 @@
+﻿@{
+    Layout = null;
+}
+
+@model FeedViewer.Models.feedrss
+<!DOCTYPE html>
+
+<html>
+<head>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.1/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.1/additional-methods.min.js"></script>
+    <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/mvc/4.0/jquery.validate.unobtrusive.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    
+    <meta name="viewport" content="width=device-width" />
+
+    <title>Teste</title>
+
+    <style>
+        .field-validation-error {
+    color: #b94a48;
+    display: inline-block;
+    *display: inline;
+    padding-left: 5px;
+    vertical-align: middle;
+    *zoom: 1;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+.input-validation-error {
+    /*
+    border: 1px solid #ff0000;
+    background-color: #ffeeee;
+    */
+    color: #b94a48;
+    border-color: #b94a48;
+}
+
+.input-validation-error:focus {
+  border-color: #953b39;
+  -webkit-box-shadow: 0 0 6px #d59392;
+  -moz-box-shadow: 0 0 6px #d59392;
+  box-shadow: 0 0 6px #d59392;
+}
+
+.validation-summary-errors {
+    /*font-weight: bold;*/
+    color: #b94a48;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Formulario horizontal</h2>
+        @DateTime.Now.Millisecond
+        @using(Html.BeginForm(null, null, FormMethod.Post, new { @class = "form-horizontal",role = "form",id="banana"  }))
+        {   
+            @Html.EditorForModel("FeedRSSEditor")    
+            <input type="submit" class="btn btn-success" id="lala" />
+        }
+    
+   </div>
+    <script type="text/javascript">
+        /*
+        $(document).ready(function () {
+            $('span[id$="-error"]').css("color","red");
+            $('.input-validation-error').parents('.form-group').addClass('has-error');
+            $('.field-validation-error').addClass('text-danger');
+        });*/
+        jQuery.extend(jQuery.validator.messages, {
+            required: "Campo obrigatório",
+            remote: "Por favor, adeque este campo",
+            email: "Por favor, entre com um e-mail válido.",
+            url: "Por favor, entre com uma URL válida.",
+            date: "Entre uma data válida.",
+            dateISO: "Entre com uma data no formato ISO.",
+            number: "Entre com somente números",
+            digits: "Apenas digitos são válidos",
+            creditcard: "Por favor, entre com um número de cartão válido",
+            equalTo: "Entre com o mesmo valor.",
+            accept: "Tem que ser uma extensão válida",
+            maxlength: jQuery.validator.format("Não mais que {0} caracteres."),
+            minlength: jQuery.validator.format("Ao menos {0} caracteres."),
+            rangelength: jQuery.validator.format("Please enter a value between {0} and {1} characters long."),
+            range: jQuery.validator.format("Please enter a value between {0} and {1}."),
+            max: jQuery.validator.format("Please enter a value less than or equal to {0}."),
+            min: jQuery.validator.format("Please enter a value greater than or equal to {0}.")
+        });
+
+        $(document).ready(function () {
+
+            /*
+            $.validator.setDefaults({
+                highlight: function (element) {
+                    $(element).closest(".form-group").addClass("has-error");
+                 },
+                unhighlight: function (element) {
+                    $(element).closest(".form-group").removeClass("error");
+                    }
+                });
+            console.log($("#banana").formData);*/
+            /*
+              $("#lala").click(function(){
+                  alert("lalal");
+                  console.log($("#banana").validator);
+                  if($("#banana").valid()){
+                  }
+                  else {
+                      $("span.field-validation-error").parents(".form-group").addClass("has-error");
+                  }
+
+              });
+              */
+        });
+
+    </script>
+</body>
+</html>
