@@ -8,18 +8,12 @@ namespace FeedViewer
         // For more information on Bundling, visit http://go.microsoft.com/fwlink/?LinkId=254725
         public static void RegisterBundles(BundleCollection bundles)
         {
-            
+            /*
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js"));
-            /*
+
             bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
                         "~/Scripts/jquery-ui-{version}.js"));*/
-            /*bundles.UseCdn = true; //BundleTable.EnableOptimizations - no global.asax           
-
-            
-            bundles.Add(new ScriptBundle("~/bundles/jquery",
-                        "https://code.jquery.com/jquery-1.12.4.min.js").Include(
-                        "~/Scripts/jquery-{version}.js"));*/
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.unobtrusive*",
