@@ -273,10 +273,10 @@
             $.ajax({
                 type: "post",
                 url: "@Url.Action("Detalhes", "RSSFeed")",
-                dataType: "json",
+                dataType: "json",                
                 data: { "id": id, "maxnot": qtd },
                 success: function (dados) {
-                    //console.log(dados);
+                    console.log(dados);
                     $("#feednome").html(nome);
                     $("#descId").val(id);
                     $("#movimentacoesRSS").html("");
@@ -284,12 +284,15 @@
                         var texto = "";
 
                         for (var x = 0; x < dados.length; x++) {
-                            texto = "<dl> \
-                                       <dt><b>"+dados[x].Title.Text+"</b></dt>\
-                                          <dd>"+dados[x].Summary.Text+"</dd> \
-                                     </dl>";
-                            $("#movimentacoesRSS").append(texto);
+                            
+                            texto += "\
+                                       <b>"+dados[x].Title.Text+"</b><br/>\
+                                          "+dados[x].Summary.Text+"<br/> \
+                                    <br/>";
+                            
                         }
+                        texto += "";
+                        $("#movimentacoesRSS").append(texto);
                     }
                     //console.log(dados);
                 },

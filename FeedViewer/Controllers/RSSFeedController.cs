@@ -1,4 +1,5 @@
-﻿using FeedViewer.Models;
+﻿using FeedViewer.Controllers.Patch;
+using FeedViewer.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -330,27 +331,32 @@ namespace FeedViewer.Controllers
         {
             JsonResult resultado=null;
             StatusAJAX estado = new StatusAJAX();
+
             try
             {
                 using (feedviewerContext contexto = new feedviewerContext())
                 {
                     feedrss rssbuscado = contexto.feedrsses.Where(f => f.id.Equals(id)).Single<feedrss>();
-                    XmlReader leitorXML = XmlReader.Create(rssbuscado.urlfeed);
-                    SyndicationFeed listaRSS=SyndicationFeed.Load(leitorXML);
+                    var feed = Argotic.Syndication.RssFeed.Create(new Uri(rssbuscado.urlfeed));
                     List<SyndicationItem> listaMovimentacao;
-                    if(maxnot == 0)
-                        listaMovimentacao = listaRSS.Items.ToList();
+
+                    if (maxnot == 0)
+                        listaMovimentacao = feed.Channel.Items.Select(f => new SyndicationItem() { Summary = new TextSyndicationContent(f.Description), Title = new TextSyndicationContent(f.Title) }).ToList();
                     else
-                        listaMovimentacao = listaRSS.Items.Take(maxnot).ToList();
+                        listaMovimentacao = feed.Channel.Items.Select(f => new SyndicationItem() { Summary = new TextSyndicationContent(f.Description), Title = new TextSyndicationContent(f.Title) }).Take(maxnot).ToList();
+
                     resultado = Json(listaMovimentacao);
+                    estado.Sucesso = true;
                 }
-                return resultado;
             }
-            catch (Exception e)
+            catch(Exception e)
             {
                 estado.Sucesso = false;
                 estado.Mensagem = e.Message;
             }
+
+            if (estado.Sucesso) return resultado;
+
             return Json(estado);
         }
 
