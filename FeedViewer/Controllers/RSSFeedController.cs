@@ -152,7 +152,7 @@ namespace FeedViewer.Controllers
                     if (novoFeed.id != 0)
                         contexto.SaveChanges();
                     else
-                    {
+                    {     
                         contexto.feedrsses.Add(novoFeed);
                         contexto.SaveChanges();
                     }
