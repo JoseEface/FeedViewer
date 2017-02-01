@@ -16,6 +16,8 @@
         }
 
     </style>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 }
 
 
@@ -119,6 +121,17 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.14.0/additional-methods.min.js"></script>
 
     <script type="text/javascript">
+
+        function sucesso(resposta) {
+            alert("sucesso");
+            console.log(resposta);
+        }
+
+        function falha(resposta) {
+            alert("falha");
+            console.log(resposta);
+        }
+
         $(document).ready(function () {
 
             var loginOriginal = "@Model.login";

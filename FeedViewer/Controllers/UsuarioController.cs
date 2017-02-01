@@ -346,7 +346,20 @@ namespace FeedViewer.Controllers
             }
             return Json(resultado);
         }
-        
+
+        public ActionResult resultado(usuario usr)
+        {
+            StatusAJAX estado = new StatusAJAX();
+            
+            estado.Sucesso = false;
+            if (ModelState.IsValid)
+            {
+                estado.Sucesso = true;
+            }
+
+            return Json(estado);
+        }
+
         void IDisposable.Dispose()
         {            
             //contexto.Dispose();

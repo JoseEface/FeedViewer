@@ -137,7 +137,7 @@ namespace FeedViewer.Controllers
         public JsonResult GravarCadastro()
         {
             feedrss novoFeed=new feedrss();
-            StatusAJAX estado = new StatusAJAX();
+            StatusAJAX estado = new StatusAJAX();            
             try
             {
                 decimal id = Convert.ToDecimal(Request["id"]);
@@ -149,10 +149,12 @@ namespace FeedViewer.Controllers
                     novoFeed.urlfeed = Request["caminhorss"];                    
                     if (id == 0 && User.Identity.IsAuthenticated)
                         novoFeed.dono = (Session["UsuarioLogado"] as LoginInfo).Usuario.id;
+                    if (!TryValidateModel(novoFeed))
+                        throw new Exception("Falha na validacao do modelo - servidor");
                     if (novoFeed.id != 0)
                         contexto.SaveChanges();
                     else
-                    {     
+                    {   
                         contexto.feedrsses.Add(novoFeed);
                         contexto.SaveChanges();
                     }
@@ -408,6 +410,11 @@ namespace FeedViewer.Controllers
                 estado.Mensagem = e.Message;
             }
             return Json(estado);
+        }
+
+        public ActionResult resultado(feedrss rssfeed)
+        {
+            return Json("lalala");
         }
 
         void IDisposable.Dispose()
