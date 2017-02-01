@@ -37,30 +37,7 @@ namespace FeedViewer.Controllers
         [Authorize(Roles="admin")]
         public ActionResult Cadastro(string id="0")
         {
-            usuario usr=new usuario();/*
-            if (id != "0")
-            {
-                try
-                {
-                    decimal domau = Convert.ToDecimal(id);
-                    usr = contexto.usuarios.Where(u => u.id.Equals(domau)).Single<usuario>();
-                }
-                catch (Exception e)
-                {
-                    System.Diagnostics.Debug.WriteLine("Usuario/Cadastro:: Usuario nao definido opcionalmente - " + e.Message);
-                    return RedirectToAction("Cadastro", "Usuario", new { id = "" });
-                }
-            }
-            else
-            {
-                if (Session["UsuarioLogado"] == null)
-                    usr.id = 0;
-                else
-                {
-                    LoginInfo info = Session["UsuarioLogado"] as LoginInfo;
-                    usr = info.Usuario;
-                }
-            }*/
+            usuario usr=new usuario();
             return View(usr);
         }
 
