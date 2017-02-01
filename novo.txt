@@ -1,1 +1,5 @@
+<<<<<<< HEAD
+novo texto para arquivo  novafdsdaf dfa 
+=======
 novo texto para arquivo  nna banana verde ova
+>>>>>>> teste
