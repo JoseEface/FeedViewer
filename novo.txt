@@ -1,9 +1,1 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-novo texto para arquivo  novafdsdaf dfa 
-=======
 novo texto para arquivo  nna banana verde ova
->>>>>>> teste
-=======
-novo texto para arquivo  novafdsdaf dfa 
->>>>>>> 868553750b8583e6b8489047a8828bad7992cb87
