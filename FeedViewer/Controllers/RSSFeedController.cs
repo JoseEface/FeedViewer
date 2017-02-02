@@ -249,8 +249,8 @@ namespace FeedViewer.Controllers
             string rssbuscado=Request["rssbusca"];
             StatusAJAX resultado = new StatusAJAX();
             JsonResult retorno = null;
-            //try
-            //{
+            try
+            {
                 IQueryable<feedrss> consulta=Enumerable.Empty<feedrss>().AsQueryable();
                 int opcao = Convert.ToInt32(Request["rssbuscatipo"]);
                 using (feedviewerContext contexto = new feedviewerContext())
@@ -317,12 +317,12 @@ namespace FeedViewer.Controllers
                 }
                 resultado.Sucesso=true;
                 //return Json(retorno);
-            //}
-           // catch (Exception e)
-            //{
-            //    resultado.Sucesso = false;
-            //    resultado.Mensagem = e.Message;
-            //}
+            }
+            catch (Exception e)
+            {
+                resultado.Sucesso = false;
+                resultado.Mensagem = e.Message;
+            }
             if (resultado.Sucesso)
                 return retorno;
             else
