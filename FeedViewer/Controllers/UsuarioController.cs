@@ -104,8 +104,8 @@ namespace FeedViewer.Controllers
         public JsonResult Gravar()
         {
             StatusAJAX novoStatus=new StatusAJAX();            
-            //try
-            //{
+            try
+            {
                 usuario usr = new usuario();
                 decimal id = Convert.ToDecimal(Request["id"]);
                 if (Request["senha"] != Request["senhaconfirma"])
@@ -146,12 +146,12 @@ namespace FeedViewer.Controllers
                 }
                 novoStatus.Sucesso = true;
                 novoStatus.Mensagem = "Sucesso";
-            //}
-            //catch(Exception e)
-            //{
-            //    novoStatus.Sucesso=false;
-            //    novoStatus.Mensagem=e.Message;
-            //}
+            }
+            catch(Exception e)
+            {
+                novoStatus.Sucesso=false;
+                novoStatus.Mensagem=e.Message;
+            }
             return Json(novoStatus);
         }
 
